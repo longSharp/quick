@@ -1,0 +1,23 @@
+server:
+  port: 11001
+  servlet:
+    context-path: /member-service
+spring:
+  messages:
+    basename: messages/message
+    useCodeAsDefaultMessage: true
+    encoding: UTF-8
+
+#############mybatis参数配置##############
+mybatis-plus:
+  # classpath* 不止扫描我自己的classpath，引用包的也扫描
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      # 主键自增
+      id-type: auto
+  type-enums-package: com.quick.member.common.enums
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+
+

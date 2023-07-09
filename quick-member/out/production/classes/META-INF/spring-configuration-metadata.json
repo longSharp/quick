@@ -1,0 +1,139 @@
+{
+  "groups": [
+    {
+      "name": "chat",
+      "type": "com.quick.member.common.config.params.ChatGptParamsConfig",
+      "sourceType": "com.quick.member.common.config.params.ChatGptParamsConfig"
+    },
+    {
+      "name": "service",
+      "type": "com.quick.member.common.config.params.ServiceParamsConfig",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "sms",
+      "type": "com.quick.member.common.config.params.AuthSmsParamsConfig",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "spring.datasource.member",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.quick.member.common.config.system.DataSourceConfig",
+      "sourceMethod": "memberDataSource()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "chat.api-key",
+      "type": "java.lang.String",
+      "sourceType": "com.quick.member.common.config.params.ChatGptParamsConfig"
+    },
+    {
+      "name": "chat.host",
+      "type": "java.lang.String",
+      "sourceType": "com.quick.member.common.config.params.ChatGptParamsConfig"
+    },
+    {
+      "name": "chat.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.quick.member.common.config.params.ChatGptParamsConfig"
+    },
+    {
+      "name": "service.init-fee",
+      "type": "java.math.BigDecimal",
+      "description": "注册初始化费用(元)",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "service.init-use-count",
+      "type": "java.lang.Long",
+      "description": "注册初始化次数(次)",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "service.invit-fee",
+      "type": "java.math.BigDecimal",
+      "description": "邀请奖励费用(元)",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "service.invit-length",
+      "type": "java.lang.Integer",
+      "description": "邀请码长度",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "service.invit-use-count",
+      "type": "java.lang.Long",
+      "description": "邀请奖励次数(次)",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "service.login-lock-time",
+      "type": "java.lang.Long",
+      "description": "登入超时时间(分)",
+      "sourceType": "com.quick.member.common.config.params.ServiceParamsConfig"
+    },
+    {
+      "name": "sms.access-key-id",
+      "type": "java.lang.String",
+      "description": "accessKeyId",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.access-key-secret",
+      "type": "java.lang.String",
+      "description": "accessKeySecret",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.app-code",
+      "type": "java.lang.String",
+      "description": "阿里巴巴订购的短信产品appCode",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.host",
+      "type": "java.lang.String",
+      "description": "短信发送验证码host",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.length",
+      "type": "java.lang.String",
+      "description": "短信验证码长度",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.minute",
+      "type": "java.lang.String",
+      "description": "短信有效时间(秒)",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.path",
+      "type": "java.lang.String",
+      "description": "发送验证路径",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.security-token",
+      "type": "java.lang.String",
+      "description": "securityToken",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.sms-sign-id",
+      "type": "java.lang.String",
+      "description": "短信前缀ID（签名ID）",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    },
+    {
+      "name": "sms.template-id",
+      "type": "java.lang.String",
+      "description": "短信正文ID（模板ID）",
+      "sourceType": "com.quick.member.common.config.params.AuthSmsParamsConfig"
+    }
+  ],
+  "hints": []
+}

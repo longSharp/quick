@@ -1,0 +1,24 @@
+// 定义全局变量,全局变量可以被任何子工程overwrite
+ext {
+    springSessionVersion = '2.2.4.RELEASE'
+    springCloudAlibabaVersion = '2021.1'
+    springDataVersion = '2.2.12.RELEASE'
+    springBootVersion = '2.7.5'
+    springVersion = '6.0.3'
+    lombokVersion = '1.18.22'
+    slf4jVersion = '1.7.21'
+    alibabaNacosVersion='2022.0.0.0-RC1'
+    springCloudVersion = '2022.0.0'
+    okhttp3Version = '3.12.0'
+    httpclientVersion = '4.5.13'
+    httpcoreVersion = '4.4.13'
+    mybatiesVersion = '3.4.2'
+    mysqlConnector = '8.0.11'
+    commonsLang3Version = '3.12.0'
+    druidVersion = '1.1.21'
+    validationApi = '3.0.2'
+    swaggerVersion = '3.0.0'
+
+    set('springCloudVersion', "2020.0.6")
+    set('alibabaNacosVersion', "2021.1")
+}

@@ -1,0 +1,349 @@
+com/quick/member/domain/dto/resp/UserMemberDTO.java
+ com.quick.member.domain.dto.resp.UserMemberDTO
+com/quick/member/domain/dto/req/GetImgForAiRespDTO.java
+ com.quick.member.domain.dto.req.GetImgForAiRespDTO
+com/quick/member/domain/dto/req/LoginByPwdReqDTO.java
+ com.quick.member.domain.dto.req.LoginByPwdReqDTO
+com/quick/member/common/config/redis/MessageConsumer.java
+ com.quick.member.common.config.redis.MessageConsumer
+ com.quick.member.common.config.redis.MessageConsumer$1
+com/quick/member/service/impl/SessionRedisCacheImpl.java
+ com.quick.member.service.impl.SessionRedisCacheImpl
+com/quick/member/common/constant/AuthServerConstant.java
+ com.quick.member.common.constant.AuthServerConstant
+com/quick/member/dao/AccountMapper.java
+ com.quick.member.dao.AccountMapper
+com/quick/member/domain/po/AccountPO.java
+ com.quick.member.domain.po.AccountPO
+com/quick/member/domain/dto/req/WechatPayerReqDTO.java
+ com.quick.member.domain.dto.req.WechatPayerReqDTO
+com/quick/member/service/impl/UserAttendanceServiceImpl.java
+ com.quick.member.service.impl.UserAttendanceServiceImpl
+com/quick/member/domain/dto/req/WechatPaymentDTO.java
+ com.quick.member.domain.dto.req.WechatPaymentDTO
+com/quick/member/common/enums/DialogTopicType.java
+ com.quick.member.common.enums.DialogTopicType
+com/quick/member/controller/UserPictureController.java
+ com.quick.member.controller.UserPictureController
+com/quick/member/common/enums/UserRole.java
+ com.quick.member.common.enums.UserRole
+com/quick/member/service/MidjourneyService.java
+ com.quick.member.service.MidjourneyService
+com/quick/member/domain/dto/resp/OrderStatusRespDTO.java
+ com.quick.member.domain.dto.resp.OrderStatusRespDTO
+com/quick/member/common/enums/IBaseEnum.java
+ com.quick.member.common.enums.IBaseEnum
+com/quick/member/dao/BalanceLogMapper.java
+ com.quick.member.dao.BalanceLogMapper
+com/quick/member/controller/DialogueTopicController.java
+ com.quick.member.controller.DialogueTopicController
+ com.quick.member.controller.DialogueTopicController$1
+com/quick/member/controller/UserDialogueController.java
+ com.quick.member.controller.UserDialogueController
+com/quick/member/service/UserDialogueService.java
+ com.quick.member.service.UserDialogueService
+com/quick/member/domain/po/DialogueTopicPO.java
+ com.quick.member.domain.po.DialogueTopicPO
+com/quick/member/MemberApplication.java
+ com.quick.member.MemberApplication
+com/quick/member/service/impl/AccountServiceImpl.java
+ com.quick.member.service.impl.AccountServiceImpl
+com/quick/member/common/config/params/WechatPayParamsConfig.java
+ com.quick.member.common.config.params.WechatPayParamsConfig
+com/quick/member/service/UseAccountService.java
+ com.quick.member.service.UseAccountService
+com/quick/member/dao/CardResourceMapper.java
+ com.quick.member.dao.CardResourceMapper
+com/quick/member/common/config/mybatis/MybatisPlusConfig.java
+ com.quick.member.common.config.mybatis.MybatisPlusConfig
+com/quick/member/service/UseLogService.java
+ com.quick.member.service.UseLogService
+com/quick/member/dao/SysUserMapper.java
+ com.quick.member.dao.SysUserMapper
+com/quick/member/domain/dto/resp/R.java
+ com.quick.member.domain.dto.resp.R
+com/quick/member/service/IAuthSmsService.java
+ com.quick.member.service.IAuthSmsService
+com/quick/member/domain/dto/req/OrderInfo.java
+ com.quick.member.domain.dto.req.OrderInfo
+com/quick/member/controller/CardResourceController.java
+ com.quick.member.controller.CardResourceController
+com/quick/member/common/enums/BalanceType.java
+ com.quick.member.common.enums.BalanceType
+com/quick/member/jobs/OrderScheduler.java
+ com.quick.member.jobs.OrderScheduler
+com/quick/member/dao/UseLogMapper.java
+ com.quick.member.dao.UseLogMapper
+com/quick/member/domain/dto/req/ChatGptModelDTO.java
+ com.quick.member.domain.dto.req.ChatGptModelDTO
+com/quick/member/dao/UserMemberMapper.java
+ com.quick.member.dao.UserMemberMapper
+com/quick/member/domain/dto/req/WechatNotifyResourceReqDTO.java
+ com.quick.member.domain.dto.req.WechatNotifyResourceReqDTO
+com/quick/member/service/impl/ProductServiceImpl.java
+ com.quick.member.service.impl.ProductServiceImpl
+com/quick/member/common/config/exception/BusinessException.java
+ com.quick.member.common.config.exception.BusinessException
+com/quick/member/controller/PaymentController.java
+ com.quick.member.controller.PaymentController
+ com.quick.member.controller.PaymentController$1
+com/quick/member/domain/po/UserAttendancePO.java
+ com.quick.member.domain.po.UserAttendancePO
+com/quick/member/domain/dto/req/RequestLogContext.java
+ com.quick.member.domain.dto.req.RequestLogContext
+com/quick/member/domain/dto/req/SendStreamReqDTO.java
+ com.quick.member.domain.dto.req.SendStreamReqDTO
+com/quick/member/service/OrderService.java
+ com.quick.member.service.OrderService
+com/quick/member/common/config/mybatis/LocalDateTimeSerializerConfig.java
+ com.quick.member.common.config.mybatis.LocalDateTimeSerializerConfig
+com/quick/member/service/impl/SysUserServiceImpl.java
+ com.quick.member.service.impl.SysUserServiceImpl
+com/quick/member/common/enums/MemberMark.java
+ com.quick.member.common.enums.MemberMark
+com/quick/member/controller/ChatGptController.java
+ com.quick.member.controller.ChatGptController
+com/quick/member/controller/OrderController.java
+ com.quick.member.controller.OrderController
+com/quick/member/dao/OrderMapper.java
+ com.quick.member.dao.OrderMapper
+com/quick/member/common/config/mybatis/MyMetaObjectHandler.java
+ com.quick.member.common.config.mybatis.MyMetaObjectHandler
+com/quick/member/controller/BalanceLogController.java
+ com.quick.member.controller.BalanceLogController
+com/quick/member/domain/po/UseAccountPO.java
+ com.quick.member.domain.po.UseAccountPO
+com/quick/member/domain/po/AbstractPO.java
+ com.quick.member.domain.po.AbstractPO
+com/quick/member/domain/po/ProductPO.java
+ com.quick.member.domain.po.ProductPO
+com/quick/member/common/config/midjourney/MidJourneyBotConfig.java
+ com.quick.member.common.config.midjourney.MidJourneyBotConfig
+com/quick/member/common/interceptor/CommonInterceptor.java
+ com.quick.member.common.interceptor.CommonInterceptor
+com/quick/member/dao/UseAccountMapper.java
+ com.quick.member.dao.UseAccountMapper
+com/quick/member/service/impl/BalanceLogServiceImpl.java
+ com.quick.member.service.impl.BalanceLogServiceImpl
+com/quick/member/dao/TopicClassMapper.java
+ com.quick.member.dao.TopicClassMapper
+com/quick/member/common/config/params/ChatGptParamsConfig.java
+ com.quick.member.common.config.params.ChatGptParamsConfig
+com/quick/member/common/config/system/InterceptorConfig.java
+ com.quick.member.common.config.system.InterceptorConfig
+com/quick/member/common/enums/OperationType.java
+ com.quick.member.common.enums.OperationType
+com/quick/member/domain/dto/req/UserDialogueReqDTO.java
+ com.quick.member.domain.dto.req.UserDialogueReqDTO
+com/quick/member/service/impl/UserProblemLogServiceImpl.java
+ com.quick.member.service.impl.UserProblemLogServiceImpl
+com/quick/member/common/interceptor/LoginInterceptor.java
+ com.quick.member.common.interceptor.LoginInterceptor
+com/quick/member/service/UserMemberService.java
+ com.quick.member.service.UserMemberService
+com/quick/member/service/impl/OrderServiceImpl.java
+ com.quick.member.service.impl.OrderServiceImpl
+ com.quick.member.service.impl.OrderServiceImpl$1
+com/quick/member/common/config/system/DataSourceConfig.java
+ com.quick.member.common.config.system.DataSourceConfig
+com/quick/member/domain/dto/req/CardResourceReqDTO.java
+ com.quick.member.domain.dto.req.CardResourceReqDTO
+com/quick/member/common/enums/Status.java
+ com.quick.member.common.enums.Status
+com/quick/member/controller/AuthSmsController.java
+ com.quick.member.controller.AuthSmsController
+com/quick/member/service/SysUserService.java
+ com.quick.member.service.SysUserService
+com/quick/member/common/enums/WechatPayMentStatus.java
+ com.quick.member.common.enums.WechatPayMentStatus
+com/quick/member/common/config/system/ContentCachingRequestWrapper.java
+ com.quick.member.common.config.system.ContentCachingRequestWrapper
+ com.quick.member.common.config.system.ContentCachingRequestWrapper$RequestCachingInputStream
+com/quick/member/domain/dto/req/TryLeapReqDTO.java
+ com.quick.member.domain.dto.req.TryLeapReqDTO
+com/quick/member/service/impl/MessageDelayQueueServiceImpl.java
+ com.quick.member.service.impl.MessageDelayQueueServiceImpl
+com/quick/member/common/config/system/SensitiveConfig.java
+ com.quick.member.common.config.system.SensitiveConfig
+com/quick/member/common/config/midjourney/MessageListener.java
+ com.quick.member.common.config.midjourney.MessageListener
+com/quick/member/service/UserAttendanceService.java
+ com.quick.member.service.UserAttendanceService
+com/quick/member/domain/dto/req/EnumCommonVO.java
+ com.quick.member.domain.dto.req.EnumCommonVO
+com/quick/member/domain/dto/resp/SysUserInfoRespDTO.java
+ com.quick.member.domain.dto.resp.SysUserInfoRespDTO
+com/quick/member/domain/po/BalanceLogPO.java
+ com.quick.member.domain.po.BalanceLogPO
+com/quick/member/service/UserPictureService.java
+ com.quick.member.service.UserPictureService
+com/quick/member/common/enums/BalanceEvent.java
+ com.quick.member.common.enums.BalanceEvent
+com/quick/member/domain/po/UseLogPO.java
+ com.quick.member.domain.po.UseLogPO
+com/quick/member/service/impl/AuthSmsServiceImpl.java
+ com.quick.member.service.impl.AuthSmsServiceImpl
+com/quick/member/common/enums/UseAccountEvent.java
+ com.quick.member.common.enums.UseAccountEvent
+com/quick/member/domain/dto/req/TryLeapAIParamsReqDTO.java
+ com.quick.member.domain.dto.req.TryLeapAIParamsReqDTO
+com/quick/member/service/impl/CardResourceServiceImpl.java
+ com.quick.member.service.impl.CardResourceServiceImpl
+ com.quick.member.service.impl.CardResourceServiceImpl$1
+com/quick/member/service/impl/UseAccountServiceImpl.java
+ com.quick.member.service.impl.UseAccountServiceImpl
+com/quick/member/dao/DialogueTopicMapper.java
+ com.quick.member.dao.DialogueTopicMapper
+com/quick/member/service/CardResourceService.java
+ com.quick.member.service.CardResourceService
+com/quick/member/mongodb/po/UserProblemLogPO.java
+ com.quick.member.mongodb.po.UserProblemLogPO
+com/quick/member/controller/ProductController.java
+ com.quick.member.controller.ProductController
+com/quick/member/jobs/MemberScheduler.java
+ com.quick.member.jobs.MemberScheduler
+com/quick/member/common/aop/LoginAspect.java
+ com.quick.member.common.aop.LoginAspect
+com/quick/member/common/filter/SignValidateFilter.java
+ com.quick.member.common.filter.SignValidateFilter
+com/quick/member/domain/dto/resp/WechatNotifyRespDTO.java
+ com.quick.member.domain.dto.resp.WechatNotifyRespDTO
+com/quick/member/domain/po/UserPicturePO.java
+ com.quick.member.domain.po.UserPicturePO
+com/quick/member/dao/UserDialogueMapper.java
+ com.quick.member.dao.UserDialogueMapper
+com/quick/member/common/config/params/MidjourneyParamsConfig.java
+ com.quick.member.common.config.params.MidjourneyParamsConfig
+com/quick/member/controller/EnumController.java
+ com.quick.member.controller.EnumController
+com/quick/member/controller/UserMemberController.java
+ com.quick.member.controller.UserMemberController
+com/quick/member/common/enums/ResultCode.java
+ com.quick.member.common.enums.ResultCode
+com/quick/member/domain/dto/req/AppSession.java
+ com.quick.member.domain.dto.req.AppSession
+com/quick/member/service/impl/WechatPaymentServiceImpl.java
+ com.quick.member.service.impl.WechatPaymentServiceImpl
+ com.quick.member.service.impl.WechatPaymentServiceImpl$1
+com/quick/member/common/filter/ChatGptUtil.java
+ com.quick.member.common.filter.ChatGptUtil
+com/quick/member/domain/dto/resp/DialogueTopicRespDTO.java
+ com.quick.member.domain.dto.resp.DialogueTopicRespDTO
+com/quick/member/common/config/redis/MessageProducer.java
+ com.quick.member.common.config.redis.MessageProducer
+com/quick/member/common/enums/UserStatus.java
+ com.quick.member.common.enums.UserStatus
+com/quick/member/domain/dto/req/RedisDelayMessage.java
+ com.quick.member.domain.dto.req.RedisDelayMessage
+com/quick/member/controller/UseAccountController.java
+ com.quick.member.controller.UseAccountController
+com/quick/member/service/impl/DialogueTopicServiceImpl.java
+ com.quick.member.service.impl.DialogueTopicServiceImpl
+com/quick/member/dao/UserPictureMapper.java
+ com.quick.member.dao.UserPictureMapper
+com/quick/member/service/AccountService.java
+ com.quick.member.service.AccountService
+com/quick/member/common/enums/OrderStatus.java
+ com.quick.member.common.enums.OrderStatus
+com/quick/member/service/BalanceLogService.java
+ com.quick.member.service.BalanceLogService
+com/quick/member/service/ProductService.java
+ com.quick.member.service.ProductService
+com/quick/member/domain/dto/req/OrderInfoReqDTO.java
+ com.quick.member.domain.dto.req.OrderInfoReqDTO
+com/quick/member/domain/dto/resp/SendCodeRespDTO.java
+ com.quick.member.domain.dto.resp.SendCodeRespDTO
+com/quick/member/mongodb/repository/UserProblemLogRepository.java
+ com.quick.member.mongodb.repository.UserProblemLogRepository
+com/quick/member/service/impl/MidjourneyServiceImpl.java
+ com.quick.member.service.impl.MidjourneyServiceImpl
+com/quick/member/common/constant/RedisKeyPrefixConstant.java
+ com.quick.member.common.constant.RedisKeyPrefixConstant
+com/quick/member/controller/UserController.java
+ com.quick.member.controller.UserController
+com/quick/member/domain/dto/req/PasswordModiReqDTO.java
+ com.quick.member.domain.dto.req.PasswordModiReqDTO
+com/quick/member/common/enums/ProblemType.java
+ com.quick.member.common.enums.ProblemType
+com/quick/member/service/impl/UserPictureServiceImpl.java
+ com.quick.member.service.impl.UserPictureServiceImpl
+com/quick/member/controller/AccountController.java
+ com.quick.member.controller.AccountController
+com/quick/member/common/config/system/EnumProperties.java
+ com.quick.member.common.config.system.EnumProperties
+com/quick/member/domain/po/CardResourcePO.java
+ com.quick.member.domain.po.CardResourcePO
+com/quick/member/controller/PayRecordController.java
+ com.quick.member.controller.PayRecordController
+com/quick/member/dao/ProductMapper.java
+ com.quick.member.dao.ProductMapper
+com/quick/member/common/utils/HttpUtils.java
+ com.quick.member.common.utils.HttpUtils
+ com.quick.member.common.utils.HttpUtils$1
+com/quick/member/common/config/exception/ExceptionMapper.java
+ com.quick.member.common.config.exception.ExceptionMapper
+com/quick/member/service/UserProblemLogService.java
+ com.quick.member.service.UserProblemLogService
+com/quick/member/domain/dto/resp/AbstractRespDTO.java
+ com.quick.member.domain.dto.resp.AbstractRespDTO
+com/quick/member/domain/dto/req/ProductReqDTO.java
+ com.quick.member.domain.dto.req.ProductReqDTO
+com/quick/member/domain/dto/req/AliSmsParamsDTO.java
+ com.quick.member.domain.dto.req.AliSmsParamsDTO
+com/quick/member/common/config/thread/ThreadPoolConfig.java
+ com.quick.member.common.config.thread.ThreadPoolConfig
+com/quick/member/controller/UseLogController.java
+ com.quick.member.controller.UseLogController
+com/quick/member/controller/SysUserController.java
+ com.quick.member.controller.SysUserController
+com/quick/member/service/impl/UserMemberServiceImpl.java
+ com.quick.member.service.impl.UserMemberServiceImpl
+com/quick/member/domain/po/SysUserPO.java
+ com.quick.member.domain.po.SysUserPO
+com/quick/member/common/config/redis/RedisConfig.java
+ com.quick.member.common.config.redis.RedisConfig
+com/quick/member/service/WechatPaymentService.java
+ com.quick.member.service.WechatPaymentService
+com/quick/member/common/enums/MemberType.java
+ com.quick.member.common.enums.MemberType
+com/quick/member/domain/dto/resp/UserDialogueRespDTO.java
+ com.quick.member.domain.dto.resp.UserDialogueRespDTO
+com/quick/member/common/config/params/ServiceParamsConfig.java
+ com.quick.member.common.config.params.ServiceParamsConfig
+com/quick/member/common/utils/OrderNoUtils.java
+ com.quick.member.common.utils.OrderNoUtils
+com/quick/member/domain/dto/resp/AuthSmsBaseResp.java
+ com.quick.member.domain.dto.resp.AuthSmsBaseResp
+ com.quick.member.domain.dto.resp.AuthSmsBaseResp$AuthSmsBaseRespBuilder
+com/quick/member/dao/UserAttendanceMapper.java
+ com.quick.member.dao.UserAttendanceMapper
+com/quick/member/common/enums/ProductType.java
+ com.quick.member.common.enums.ProductType
+com/quick/member/service/IMessageDelayQueueService.java
+ com.quick.member.service.IMessageDelayQueueService
+com/quick/member/service/PayRecordService.java
+ com.quick.member.service.PayRecordService
+com/quick/member/service/impl/PayRecordServiceImpl.java
+ com.quick.member.service.impl.PayRecordServiceImpl
+com/quick/member/domain/po/OrderPO.java
+ com.quick.member.domain.po.OrderPO
+com/quick/member/domain/po/UserMemberPO.java
+ com.quick.member.domain.po.UserMemberPO
+com/quick/member/service/DialogueTopicService.java
+ com.quick.member.service.DialogueTopicService
+com/quick/member/domain/po/TopicClassPO.java
+ com.quick.member.domain.po.TopicClassPO
+com/quick/member/domain/po/PayRecordPO.java
+ com.quick.member.domain.po.PayRecordPO
+com/quick/member/service/impl/UseLogServiceImpl.java
+ com.quick.member.service.impl.UseLogServiceImpl
+com/quick/member/service/ISessionCache.java
+ com.quick.member.service.ISessionCache
+com/quick/member/dao/PayRecordMapper.java
+ com.quick.member.dao.PayRecordMapper
+com/quick/member/service/impl/UserDialogueServiceImpl.java
+ com.quick.member.service.impl.UserDialogueServiceImpl
+com/quick/member/common/config/params/AuthSmsParamsConfig.java
+ com.quick.member.common.config.params.AuthSmsParamsConfig
+com/quick/member/domain/po/UserDialoguePO.java
+ com.quick.member.domain.po.UserDialoguePO

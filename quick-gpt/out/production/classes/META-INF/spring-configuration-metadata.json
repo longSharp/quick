@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "chatgpt",
+      "type": "com.quick.gpt.config.ChatGPTProperties",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "chatgpt.chat-model",
+      "type": "java.lang.String",
+      "description": "chatModel which use by createChatCompletion",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.model",
+      "type": "java.lang.String",
+      "description": "The name of the model to use. Required if specifying a fine-tuned model or if using the new v1\/completions endpoint.",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.proxy-host",
+      "type": "java.lang.String",
+      "description": "proxyHost",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "proxyPort",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.retries",
+      "type": "java.lang.Integer",
+      "description": "Timeout retries",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.session-expiration-time",
+      "type": "java.lang.Integer",
+      "description": "sessionExpirationTime",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    },
+    {
+      "name": "chatgpt.token",
+      "type": "java.lang.String",
+      "description": "OpenAi token string \"sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"",
+      "sourceType": "com.quick.gpt.config.ChatGPTProperties"
+    }
+  ],
+  "hints": []
+}

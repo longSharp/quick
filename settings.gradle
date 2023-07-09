@@ -1,0 +1,8 @@
+rootProject.name = 'quick-ai'
+
+include 'quick-member'
+include 'quick-gpt'
+include 'quick-mongodb'
+include 'quick-commom'
+include 'quick-gateway'
+

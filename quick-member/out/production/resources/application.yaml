@@ -1,0 +1,59 @@
+server:
+  port: 11001
+  servlet:
+    context-path: /member-service
+spring:
+  messages:
+    basename: messages/message
+    useCodeAsDefaultMessage: true
+    encoding: UTF-8
+mybatis-plus:
+  # classpath* 不止扫描我自己的classpath，引用包的也扫描
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      # 主键自增
+      id-type: auto
+  type-enums-package: com.star.system.integral.common.enums
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+
+#############bossapi##############
+sms:
+  host: https://gyytz.market.alicloudapi.com
+  path: /sms/smsSend
+  appCode: 2f996f436eb84174b114656afe57d8d1
+  minute: 60
+  length: 5
+  smsSignId: 2e65b1bb3d054466b82f0c9d125465e2
+  templateId: 908e94ccf08b4476ba6c876d13f084ad
+
+#############业务参数配置################
+service:
+  #邀请奖励费用(元)
+  invitFee: 1
+  #邀请奖励次数(次)
+  invitUseCount: 10
+  #邀请码长度
+  invitLength: 6
+  #注册初始化费用(元)
+  initFee: 0
+  #注册初始化次数(次)
+  initUseCount: 10
+  #登入超时时间(分)
+  loginLockTime: 60
+
+chat:
+  apiKey: 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
+  host: 127.0.0.1
+  port: 7890
+
+chatgpt:
+  token: sk-xxxxxxxxxxxxxxxxxx
+  proxy-host: 127.0.0.1
+  proxy-port: 7890
+  model: text-davinci-003 #可选
+  chat-model: gpt-3.5-turbo #可选
+  retries: 10 #可选，默认为5
+
+

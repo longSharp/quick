@@ -1,0 +1,40 @@
+package com.quick.gpt.exception;
+
+
+import com.quick.gpt.enums.exception.ChatGPTErrorEnum;
+
+public class ChatGPTException extends RuntimeException {
+    private String errorCode = "-1";
+
+    private String errorMessage = "";
+
+    public ChatGPTException() {
+        super();
+    }
+
+    public ChatGPTException(ChatGPTErrorEnum chatGPTErrorEnum) {
+        super(chatGPTErrorEnum.getErrorMessage());
+        this.errorCode = chatGPTErrorEnum.getErrorCode();
+        this.errorMessage = chatGPTErrorEnum.getErrorMessage();
+    }
+
+    public ChatGPTException(ChatGPTErrorEnum chatGPTErrorEnum, Object... messages) {
+        super(String.format(chatGPTErrorEnum.getErrorMessage(), messages));
+        this.errorCode = chatGPTErrorEnum.getErrorCode();
+        this.errorMessage = String.format(chatGPTErrorEnum.getErrorMessage(), messages);
+    }
+
+    public ChatGPTException(String errorCode, String errorMessage) {
+        super(errorMessage);
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+}

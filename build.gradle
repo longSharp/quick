@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.6'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+}
+
+group = 'com.quick'
+version = '0.0.1-SNAPSHOT'
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply from: "$rootDir/ext.gradle"
+
+
+// 定义所有叶子节点工程共有的逻辑
+configure(allprojects.findAll { it.subprojects.empty }) {
+    // 引入插件
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'java-library'
+    apply from: "$rootDir/ext.gradle"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+        api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+        api 'com.alibaba:fastjson:2.0.7'
+        api 'cn.hutool:hutool-all:5.8.5'
+        api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+        api "org.apache.commons:commons-lang3:${commonsLang3Version}"
+        api 'commons-io:commons-io:2.11.0'
+        api 'org.springframework.boot:spring-boot-starter-validation'
+        api "io.springfox:springfox-swagger2:${swaggerVersion}"
+    }
+
+    javadoc {
+        options.charSet = 'utf8'
+        options.encoding = 'utf8'
+        options.docEncoding = 'utf8'
+        options.memberLevel = JavadocMemberLevel.PRIVATE
+    }
+}

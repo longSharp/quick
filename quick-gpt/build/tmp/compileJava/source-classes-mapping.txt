@@ -1,0 +1,35 @@
+com/quick/gpt/config/ChatGPTAutoConfigure.java
+ com.quick.gpt.config.ChatGPTAutoConfigure
+com/quick/gpt/util/OpenAiUtils.java
+ com.quick.gpt.util.OpenAiUtils
+com/quick/gpt/enums/chat/RoleEnum.java
+ com.quick.gpt.enums.chat.RoleEnum
+com/quick/gpt/exception/ChatGPTException.java
+ com.quick.gpt.exception.ChatGPTException
+com/quick/gpt/config/ChatGPTProperties.java
+ com.quick.gpt.config.ChatGPTProperties
+ com.quick.gpt.config.ChatGPTProperties$ChatGPTPropertiesBuilder
+com/quick/gpt/enums/model/ModelEnum.java
+ com.quick.gpt.enums.model.ModelEnum
+com/quick/gpt/enums/chat/FinishReasonEnum.java
+ com.quick.gpt.enums.chat.FinishReasonEnum
+com/quick/gpt/enums/image/ImageResponseFormatEnum.java
+ com.quick.gpt.enums.image.ImageResponseFormatEnum
+com/quick/gpt/service/OpenAiProxyService.java
+ com.quick.gpt.service.OpenAiProxyService
+com/quick/gpt/annotation/EnableChatGPT.java
+ com.quick.gpt.annotation.EnableChatGPT
+com/quick/gpt/dto/Plan.java
+ com.quick.gpt.dto.Plan
+com/quick/gpt/enums/exception/ChatGPTErrorEnum.java
+ com.quick.gpt.enums.exception.ChatGPTErrorEnum
+com/quick/gpt/enums/image/ImageSizeEnum.java
+ com.quick.gpt.enums.image.ImageSizeEnum
+com/quick/gpt/enums/edit/EditModelEnum.java
+ com.quick.gpt.enums.edit.EditModelEnum
+com/quick/gpt/dto/Billing.java
+ com.quick.gpt.dto.Billing
+com/quick/gpt/dto/Subscription.java
+ com.quick.gpt.dto.Subscription
+com/quick/gpt/enums/embedding/EmbeddingModelEnum.java
+ com.quick.gpt.enums.embedding.EmbeddingModelEnum
