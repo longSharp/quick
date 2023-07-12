@@ -23,7 +23,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/sms/sendCode",
             "/user/modifyPwd",
             "/gpt/sendStream",
-            "/payment/notify"
+            "/payment/notify",
+            "/image/generate",
+            "/image/getTask"
     };
 
     @Override

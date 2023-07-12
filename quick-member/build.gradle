@@ -19,4 +19,6 @@ dependencies {
     implementation 'com.github.binarywang:weixin-java-pay:4.4.1.B'
     implementation 'com.github.wechatpay-apiv3:wechatpay-apache-httpclient:0.4.8'
     implementation 'org.redisson:redisson:3.17.7'
+    implementation 'net.dv8tion:JDA:5.0.0-alpha.20'
+//    implementation 'com.google.cloud:google-cloud-translate:2.3.3'
 }

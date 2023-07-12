@@ -19,7 +19,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         ServiceParamsConfig.class,
         ChatGptParamsConfig.class,
         WechatPayParamsConfig.class,
-        MidjourneyParamsConfig.class})
+        MidjourneyParamsConfig.class,
+        BaiduParamsConfig.class})
 public class MemberApplication {
 
     public static void main(String[] args) {

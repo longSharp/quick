@@ -39,10 +39,11 @@ public class MessageConsumer {
 
     public void consumerByOrder(String delayQueueName){
         RLock lock = null;
+        boolean isLock = false;
         try {
             //加分布式锁
             lock = redissonClient.getLock(RedisKeyPrefixConstant.LOCAK_ORDER_PREFIX+ delayQueueName);
-            boolean isLock = lock.tryLock();
+            isLock = lock.tryLock();
             if(isLock) {
                 if(RedisKeyPrefixConstant.DELAY_QUEUE_NAME.equals(delayQueueName)){
                     List<RedisDelayMessage> messageList = delayQueueService.pull();
@@ -53,17 +54,18 @@ public class MessageConsumer {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(lock!=null){
+            if(isLock){
                 lock.unlock();
             }
         }
     }
     public void consumerByMember(String delayQueueName){
         RLock lock = null;
+        boolean isLock = false;
         try {
             //加分布式锁
             lock = redissonClient.getLock(RedisKeyPrefixConstant.LOCAK_MEMBER_PREFIX+ delayQueueName);
-            boolean isLock = lock.tryLock();
+            isLock = lock.tryLock();
             if(isLock) {
                 List<RedisDelayMessage> messageList = delayQueueService.pull(delayQueueName);
                 handleMessageForMember(messageList,delayQueueName);
@@ -71,7 +73,7 @@ public class MessageConsumer {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(lock!=null){
+            if(isLock){
                 lock.unlock();
             }
         }

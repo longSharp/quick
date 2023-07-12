@@ -85,6 +85,7 @@ public class PaymentController {
     public WechatNotifyRespDTO notify(@RequestBody Map<String, Object> signalRes){
         WechatNotifyRespDTO resp = new WechatNotifyRespDTO();
         RLock lock = null;
+        boolean isLock = false;
         try {
             //用密文解密出明文
             Map<String,String> resource=(Map<String,String>)signalRes.get("resource");
@@ -100,7 +101,7 @@ public class PaymentController {
             }
             //加分布式锁
             lock = redissonClient.getLock(RedisKeyPrefixConstant.LOCAK_ORDER_PREFIX+resourceReqDTO.getOut_trade_no());
-            boolean isLock = lock.tryLock();
+            isLock = lock.tryLock();
             if(isLock){
                 OrderPO orderByOrderNo = orderService.getOrderByOrderNo(resourceReqDTO.getOut_trade_no());
                 if(orderByOrderNo.getOrderStatus()== OrderStatus.WAIT_PAY){
@@ -147,7 +148,7 @@ public class PaymentController {
             resp.setMessage("失败-支付回调失败");
             return resp;
         }finally {
-            if(lock!=null){
+            if(isLock){
                 lock.unlock();
             }
         }

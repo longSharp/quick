@@ -6,9 +6,14 @@ package com.quick.member.common.constant;
  */
 public class RedisKeyPrefixConstant {
     /**
-     * 产品购买
+     * 生成图片任务
      */
-    public static final String WECHAT_PRODUCT_PREFIX = "wechat:product:";
+    public static final String IMAGE_TASK = "image_task:";
+
+    /**
+     * 临时记录task所属者
+     */
+    public static final String TASK_USER_ID = "task_user_id:";
 
     /**
      * 订单延迟队列名称

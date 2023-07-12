@@ -17,6 +17,7 @@ import com.quick.member.mongodb.repository.UserProblemLogRepository;
 import com.quick.member.service.DialogueTopicService;
 import com.quick.member.service.UserDialogueService;
 import com.theokanning.openai.completion.chat.ChatMessage;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -86,8 +87,10 @@ public class UserDialogueServiceImpl extends ServiceImpl<UserDialogueMapper, Use
     public List<UserDialoguePO> getDialogueByName(Long userId, String name,Boolean isTopic) {
         LambdaQueryWrapper<UserDialoguePO> query = new LambdaQueryWrapper<>();
         query.eq(UserDialoguePO::getUserId,userId)
-                .eq(UserDialoguePO::getStatus, Status.VALID)
-                .like(UserDialoguePO::getName,name);
+                .eq(UserDialoguePO::getStatus, Status.VALID);
+        if(!StringUtils.isEmpty(name)){
+            query.like(UserDialoguePO::getName,name);
+        }
         if(isTopic){
             query.isNotNull(UserDialoguePO::getTopicId);
         }else{

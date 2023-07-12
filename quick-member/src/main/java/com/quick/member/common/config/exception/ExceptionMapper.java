@@ -61,8 +61,7 @@ public class ExceptionMapper {
     @ResponseBody
     public R handleRuntimeException(RuntimeException ex){
         ex.printStackTrace();
-        String message = ex.getMessage();
-        return R.error(ResultCode.REQUEST_FAIL.getCode(),message);
+        return R.error();
     }
 
     @ExceptionHandler({Exception.class})
@@ -70,7 +69,6 @@ public class ExceptionMapper {
     @ResponseBody
     public R handleException(Exception ex){
         ex.printStackTrace();
-        String message = ex.getMessage();
-        return R.error(ResultCode.REQUEST_FAIL.getCode(),message);
+        return R.error();
     }
 }

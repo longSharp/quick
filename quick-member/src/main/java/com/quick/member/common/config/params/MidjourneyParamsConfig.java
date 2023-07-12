@@ -30,6 +30,10 @@ public class MidjourneyParamsConfig {
      * 登入凭证
      */
     private String token;
+    /**
+     * 机器码
+     */
+    private String botId;
 
     /**
      * 获取body参数

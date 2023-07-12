@@ -22,7 +22,7 @@ public enum ResultCode {
     /**
      * 参数校验异常
      */
-    PARAMS_VALID_FAIL("000002","参数校验失败"),
+    PARAMS_VALID_FAIL("000002","参数错误"),
 
     //################短信业务################
     /**
