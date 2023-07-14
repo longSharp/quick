@@ -3,6 +3,7 @@ package com.quick.member.common.config.midjourney;
 import cn.hutool.json.JSONUtil;
 import com.quick.member.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.common.enums.ImageJobStatus;
+import com.quick.member.common.enums.ImageJobType;
 import com.quick.member.dao.ImageJobMapper;
 import com.quick.member.domain.po.ImageJobPO;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class MessageListener extends ListenerAdapter {
         Message message = event.getMessage();
         String messageId = message.getId();
         String content = message.getContentRaw();
-        log.info("############# end message content: " + content);
+        log.info("############# message content: " + content);
         List<Message.Attachment> attachments = message.getAttachments();
         if(attachments.size()>0) {
             String taskId = getTaskId(content);
@@ -57,7 +58,7 @@ public class MessageListener extends ListenerAdapter {
             if(mass.length>0){
                 messageHash = mass[mass.length-1].split("\\.")[0];
             }
-
+            ImageJobType jobType = imageJobPO.getJobType();
             String[] resUrl = url.split(".com/");
             imageJobPO.setJobStatus(ImageJobStatus.GENERATED)
                     .setImgPath(resUrl[1])
@@ -88,19 +89,31 @@ public class MessageListener extends ListenerAdapter {
                 return;
             }
             Message.Attachment attachment = attachments.get(0);
-            String schedule = getSchedule(content);
-            if(schedule==null){
-                return;
-            }
             String url = attachment.getUrl();
             String[] resUrl = url.split(".com/");
             //查询redis并且更新redis
             String userId = redisTemplate.opsForValue().get(RedisKeyPrefixConstant.TASK_USER_ID + taskId);
             String taskStr = (String)redisTemplate.opsForHash().get(RedisKeyPrefixConstant.IMAGE_TASK + userId, taskId);
             ImageJobPO imageJobPO = JSONUtil.toBean(taskStr, ImageJobPO.class);
-            imageJobPO.setJobSchedule(schedule)
-                    .setImgPath(resUrl[1]);
-            redisTemplate.opsForHash().put(RedisKeyPrefixConstant.IMAGE_TASK + userId,taskId,JSONUtil.toJsonStr(imageJobPO));
+            if(imageJobPO==null||imageJobPO.getId()==null){
+                return;
+            }
+            ImageJobType jobType = imageJobPO.getJobType();
+            String schedule = getSchedule(content);
+            switch (jobType) {
+                case TEXT_GENERATE:
+                    if(schedule==null){
+                        return;
+                    }
+                    imageJobPO.setJobSchedule(schedule)
+                            .setImgPath(resUrl[1]);
+                    redisTemplate.opsForHash().put(RedisKeyPrefixConstant.IMAGE_TASK + userId,taskId,JSONUtil.toJsonStr(imageJobPO));
+                    break;
+                case UPSCALE:
+                    imageJobPO.setJobSchedule("99")
+                            .setImgPath(resUrl[1]);
+                    redisTemplate.opsForHash().put(RedisKeyPrefixConstant.IMAGE_TASK + userId,taskId,JSONUtil.toJsonStr(imageJobPO));
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.quick.member.common.interceptor;
 
 import cn.hutool.json.JSONUtil;
 import com.quick.member.common.enums.ResultCode;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.AppSession;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.service.ISessionCache;
@@ -59,6 +60,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.getWriter().write(json);
             return false;
         }
+        UserHolder.setUserId(Long.parseLong(userIds[1]));
         return true;
     }
 }

@@ -49,6 +49,7 @@ public class EnumController {
                 enumCommonVoS.add(enumCommonVO);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new BusinessException(ResultCode.REQUEST_FAIL);
         }
         return R.ok(enumCommonVoS);

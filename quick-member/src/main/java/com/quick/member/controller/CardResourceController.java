@@ -5,6 +5,7 @@ import com.quick.member.common.config.exception.BusinessException;
 import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.domain.po.CardResourcePO;
@@ -39,10 +40,8 @@ public class CardResourceController {
     }
 
     @PostMapping("/cardResourceConvert")
-    public R cardResourceConvert(@Valid @NotBlank @RequestParam String cardPwd, HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
-        Long userId = Long.parseLong(userIds[1]);
+    public R cardResourceConvert(@Valid @NotBlank @RequestParam String cardPwd){
+        Long userId = UserHolder.getUserId();
         checkUser(userId);
         cardResourceService.cardResourceConvert(userId,cardPwd);
         return R.ok();

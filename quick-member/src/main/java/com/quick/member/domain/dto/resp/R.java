@@ -59,6 +59,13 @@ public class R<T> implements Serializable {
         return r;
     }
 
+    public static <T> R<T> error(ResultCode result) {
+        R<T> r = new R<>();
+        r.code = result.getCode();
+        r.msg = result.getMsg();
+        return r;
+    }
+
     public static <T> R<T> error() {
         R<T> r = new R<>();
         r.msg = ResultCode.REQUEST_FAIL.getMsg();

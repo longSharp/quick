@@ -53,6 +53,7 @@ public class ExceptionMapper {
 
     @ExceptionHandler(BusinessException.class)
     public R businessExceptionHandler(BusinessException e) {
+        e.printStackTrace();
         return R.error(e.getCode(), e.getMessage());
     }
 

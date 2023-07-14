@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.quick.member.common.enums.ImageJobStatus;
+import com.quick.member.common.enums.ImageJobType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -50,4 +51,7 @@ public class ImageJobPO extends AbstractPO implements Serializable {
 
     @TableField("`message_hash`")
     private String messageHash;
+
+    @TableField("`job_type`")
+    private ImageJobType jobType;
 }

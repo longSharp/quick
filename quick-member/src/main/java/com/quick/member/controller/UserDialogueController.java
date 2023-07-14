@@ -1,6 +1,7 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.UserDialogueReqDTO;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.UserDialogueRespDTO;
@@ -27,29 +28,23 @@ public class UserDialogueController {
     private UserDialogueService userDialogueService;
 
     @RequestMapping(value = "/getDialogueByUserId/{topic}")
-    public R<List<UserDialogueRespDTO>> getDialogueByUserId(@NotNull @PathVariable Integer topic, HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
+    public R<List<UserDialogueRespDTO>> getDialogueByUserId(@NotNull @PathVariable Integer topic){
         Boolean isTopic = topic==1;
-        List<UserDialoguePO> dialogues = userDialogueService.getDialogueByUserId(Long.parseLong(userIds[1]),isTopic);
+        List<UserDialoguePO> dialogues = userDialogueService.getDialogueByUserId(UserHolder.getUserId(),isTopic);
         return R.ok(BeanUtil.copyToList(dialogues,UserDialogueRespDTO.class));
     }
 
     @RequestMapping(value = "/getDialogueByName")
-    public R<List<UserDialogueRespDTO>> getDialogueByName(@NotNull @RequestParam Integer topic,@RequestParam String name, HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
+    public R<List<UserDialogueRespDTO>> getDialogueByName(@NotNull @RequestParam Integer topic,@RequestParam String name){
         Boolean isTopic = topic==1;
-        List<UserDialoguePO> dialogues = userDialogueService.getDialogueByName(Long.parseLong(userIds[1]),name,isTopic);
+        List<UserDialoguePO> dialogues = userDialogueService.getDialogueByName(UserHolder.getUserId(),name,isTopic);
         return R.ok(BeanUtil.copyToList(dialogues,UserDialogueRespDTO.class));
     }
 
     @RequestMapping(value = "/modifyDialogue", method = RequestMethod.POST)
-    public R<UserDialogueRespDTO> modifyDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs,HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
+    public R<UserDialogueRespDTO> modifyDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
         UserDialoguePO userDialoguePO = BeanUtil.copyProperties(userDisalogs, UserDialoguePO.class);
-        userDialoguePO.setUserId(Long.parseLong(userIds[1]));
+        userDialoguePO.setUserId(UserHolder.getUserId());
         userDialogueService.modifyDialogue(userDialoguePO);
         return R.ok(BeanUtil.copyProperties(userDialoguePO,UserDialogueRespDTO.class));
     }
@@ -61,11 +56,9 @@ public class UserDialogueController {
     }
 
     @RequestMapping(value = "/addDialogue", method = RequestMethod.POST)
-    public R<UserDialogueRespDTO> addDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs,HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
+    public R<UserDialogueRespDTO> addDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
         UserDialoguePO userDialoguePO = BeanUtil.copyProperties(userDisalogs, UserDialoguePO.class);
-        userDialoguePO.setUserId(Long.parseLong(userIds[1]));
+        userDialoguePO.setUserId(UserHolder.getUserId());
         userDialogueService.addDialogue(userDialoguePO);
         return R.ok(BeanUtil.copyProperties(userDialoguePO,UserDialogueRespDTO.class));
     }

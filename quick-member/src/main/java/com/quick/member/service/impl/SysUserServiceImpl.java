@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
+
 /**
  * <p>
  * 用户表 服务实现类
@@ -153,7 +155,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
         //1.创建用户账号
         SysUserPO sysUserPO = new SysUserPO();
         //生成邀请码
-        String code = RandomUtil.randomString(serviceParamsConfig.getInvitLength());
+        String code = RandomUtil.randomString(serviceParamsConfig.getInvitLength()).toUpperCase(Locale.ROOT);
         sysUserPO.setTel(phone)
                 .setInvitePersonCode(invitCode)
                 .setInviteCode(code)

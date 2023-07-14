@@ -5,6 +5,7 @@ import com.quick.member.common.constant.AuthServerConstant;
 import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.LoginByPwdReqDTO;
 import com.quick.member.domain.dto.req.PasswordModiReqDTO;
 import com.quick.member.domain.dto.resp.R;
@@ -95,13 +96,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "attendance", method = RequestMethod.POST)
-    public R<UseLogPO> attendance(HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
-        if(userIds.length<2){
-            return R.error(ResultCode.USER_ATTENDANCE_FAIL.getCode(), ResultCode.USER_ATTENDANCE_FAIL.getMsg());
-        }
-        Long userId = Long.parseLong(userIds[1]);
+    public R<UseLogPO> attendance(){
+        Long userId = UserHolder.getUserId();
         //检测用户状态，角色
         checkUser(userId);
         //检查用户是否已签到
@@ -126,10 +122,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "getUserInfo", method = RequestMethod.POST)
-    public R<SysUserInfoRespDTO> getUserInfo(HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
-        SysUserInfoRespDTO sysUserInfoRespDTO = sysUserService.queryUserById(Long.parseLong(userIds[1]));
+    public R<SysUserInfoRespDTO> getUserInfo(){
+        SysUserInfoRespDTO sysUserInfoRespDTO = sysUserService.queryUserById(UserHolder.getUserId());
         return R.ok(ResultCode.REQUEST_SUCCESS.getCode(), ResultCode.REQUEST_SUCCESS.getMsg(),sysUserInfoRespDTO);
     }
 

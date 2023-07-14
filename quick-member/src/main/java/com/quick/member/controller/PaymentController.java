@@ -8,6 +8,7 @@ import com.quick.member.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.common.enums.OrderStatus;
 import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.WechatPayMentStatus;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.*;
 import com.quick.member.domain.dto.resp.OrderStatusRespDTO;
 import com.quick.member.domain.dto.resp.R;
@@ -54,11 +55,9 @@ public class PaymentController {
 
 
     @PostMapping("/createOrder")
-    public R<WechatPaymentDTO> createOrder(@Valid @NotNull @RequestBody OrderInfoReqDTO orderDto, HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
+    public R<WechatPaymentDTO> createOrder(@Valid @NotNull @RequestBody OrderInfoReqDTO orderDto){
         OrderInfo orderInfo = BeanUtil.copyProperties(orderDto,OrderInfo.class);
-        orderInfo.setUserId(Long.parseLong(userIds[1]));
+        orderInfo.setUserId(UserHolder.getUserId());
         WechatPaymentDTO payment = wechatPaymentService.createWechatOrderAll(orderInfo);
         return R.ok(payment);
     }

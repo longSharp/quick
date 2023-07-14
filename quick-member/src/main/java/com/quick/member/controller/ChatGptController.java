@@ -22,6 +22,7 @@ import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.Status;
 import com.quick.member.common.filter.ChatGptUtil;
 import com.quick.member.common.utils.HttpUtils;
+import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.*;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.po.DialogueTopicPO;
@@ -80,10 +81,6 @@ public class ChatGptController {
     private ChatGptParamsConfig config;
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
-    @Autowired
-    private DialogueTopicService dialogueTopicService;
-    @Autowired
-    private UserProblemLogRepository userProblemLogRepository;
 
     @RequestMapping(value = "/sendMsg", method = RequestMethod.POST)
     public R sendMsg(@RequestBody List<ChatGptModelDTO> messages){
@@ -200,10 +197,8 @@ public class ChatGptController {
     }
 
     @RequestMapping(value = "/getGptLog/{type}/{dialogId}")
-    public R<List<ChatMessage>> getGptLog(@NotNull @PathVariable Integer type,@NotNull @PathVariable Long dialogId, HttpServletRequest request){
-        String sessionId = request.getHeader("sessionId");
-        String[] userIds = sessionId.split("-");
-        Long userId = Long.parseLong(userIds[1]);
+    public R<List<ChatMessage>> getGptLog(@NotNull @PathVariable Integer type,@NotNull @PathVariable Long dialogId){
+        Long userId = UserHolder.getUserId();
         List<UserProblemLogPO> userProblemLogPOS = userProblemLogService.queryAllByUserIdAndDiaId(userId,dialogId,ProblemType.valueOf(type));
         if(userProblemLogPOS!=null&&userProblemLogPOS.size()>=1&&userProblemLogPOS.get(0).getTopic()!=null&&userProblemLogPOS.get(0).getTopic()){
             userProblemLogPOS.remove(0);

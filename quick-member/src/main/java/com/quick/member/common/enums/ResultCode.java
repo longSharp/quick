@@ -8,6 +8,7 @@ package com.quick.member.common.enums;
  * 20开头 会员业务
  * 30开头 gpt业务
  * 40开头 订单业务
+ * 50开头 绘画业务
  */
 public enum ResultCode {
     //################ 基础业务################
@@ -171,7 +172,25 @@ public enum ResultCode {
     /**
      * 商品价格错误
      */
-    PRODUCT_PRICE_ERROR("400006","商品价格错误");
+    PRODUCT_PRICE_ERROR("400006","商品价格错误"),
+
+    //################绘画业务################
+    /**
+     * 查不到任务
+     */
+    NOT_FOND_TASK("500000","查不到任务"),
+    /**
+     * 子任务正在运行
+     */
+    HAVE_TASK_RUN("500001","子任务正在运行"),
+    /**
+     * 子任务正在运行
+     */
+    GENERATE_FAIL("500002","生成失败"),
+    /**
+     * 图片比例错误
+     */
+    PROPORT_ERROR("500003","图片比例错误");
 
     private String code;
     private String msg;

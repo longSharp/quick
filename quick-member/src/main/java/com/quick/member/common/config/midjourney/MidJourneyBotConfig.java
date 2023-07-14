@@ -18,7 +18,7 @@ public class MidJourneyBotConfig {
     @Autowired
     private MessageListener messageListener;
 
-    @Bean
+//    @Bean
     public JDA jda() throws Exception {
         JDA jda = JdaUtil.createJda(config.getBotId());
         jda.addEventListener(messageListener);
