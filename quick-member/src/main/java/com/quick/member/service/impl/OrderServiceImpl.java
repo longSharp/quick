@@ -105,13 +105,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderPO> implemen
             UserMemberPO userMemberPO = new UserMemberPO();
             LocalDateTime start = LocalDateTime.now();
             LocalDateTime end = getEndDate(start, orderByOrderNo.getProductType());
+            //TODO 新增会员信息
             userMemberPO.setUserId(orderByOrderNo.getUserId())
                     .setType(orderByOrderNo.getProductType())
                     .setStartDate(start)
                     .setEndDate(end)
-                    .setOrderNo(orderNo)
-                    .setTodayBalanceCount(config.getMemberUseCount())
-                    .setBalanceCountTime(start);
+                    .setOrderNo(orderNo);
             userMemberMapper.insert(userMemberPO);
 
             //将信息加入延时队列

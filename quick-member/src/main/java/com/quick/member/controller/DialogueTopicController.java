@@ -1,12 +1,14 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quick.member.common.config.params.ServiceParamsConfig;
 import com.quick.member.common.enums.DialogTopicType;
 import com.quick.member.common.enums.Status;
+import com.quick.member.common.enums.TopicApplication;
 import com.quick.member.dao.TopicClassMapper;
 import com.quick.member.domain.dto.resp.DialogueTopicRespDTO;
 import com.quick.member.domain.dto.resp.R;
@@ -41,7 +43,7 @@ public class DialogueTopicController {
     private ServiceParamsConfig config;
 
     @RequestMapping(value = "/getDialogueTopicsByType/{typeId}")
-    public R<List<DialogueTopicRespDTO>> getDialogueTopicsByType(@NotNull @PathVariable Integer typeId){
+    public R<String> getDialogueTopicsByType(@NotNull @PathVariable Long typeId){
         List<DialogueTopicPO> dialogueTopics = dialogueTopicService.getDialogueTopicsByType(typeId);
         List<DialogueTopicRespDTO> result = BeanUtil.copyToList(dialogueTopics, DialogueTopicRespDTO.class);
         List<DialogueTopicRespDTO> collect = result.stream().map(item -> {
@@ -52,7 +54,7 @@ public class DialogueTopicController {
     }
 
     @RequestMapping(value = "/getDialogueTopics")
-    public R<List<DialogueTopicRespDTO>> getDialogueTopics(){
+    public R<String> getDialogueTopics(){
         List<DialogueTopicPO> dialogueTopics = dialogueTopicService.list();
         List<DialogueTopicRespDTO> result = BeanUtil.copyToList(dialogueTopics, DialogueTopicRespDTO.class);
         return R.ok(result);
@@ -65,9 +67,10 @@ public class DialogueTopicController {
     }
 
     @RequestMapping(value = "/getTopicClassAll")
-    public R<List<TopicClassPO>> getTopicClassAll(){
+    public R<String> getTopicClassAll(){
         LambdaQueryWrapper<TopicClassPO> query = new LambdaQueryWrapper<>();
         query.eq(TopicClassPO::getStatus, Status.VALID);
+        query.eq(TopicClassPO::getApplication, TopicApplication.QUES_ANS);
         List<TopicClassPO> classes = mapper.selectList(query);
         List<TopicClassPO> collect = classes.stream().map(item -> {
             item.setLogoPath(config.getMinioBaseUrl() + item.getLogoPath());
@@ -77,7 +80,7 @@ public class DialogueTopicController {
     }
 
     @RequestMapping(value = "/loadTopic")
-    public R<List<DialogueTopicPO>> loadTopic() throws IOException {
+    public R<String> loadTopic() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<DialogueTopicPO> data = objectMapper.readValue(new File(config.getLoadTopicPath()), new TypeReference<List<DialogueTopicPO>>(){});
         dialogueTopicService.saveBatch(data);

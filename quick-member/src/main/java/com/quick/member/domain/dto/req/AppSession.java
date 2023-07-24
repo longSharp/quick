@@ -19,6 +19,8 @@ public final class AppSession implements Serializable {
 
     private String userId;
 
+    private Integer role;
+
     private long creationTime = System.currentTimeMillis();
 
     private long lastAccessedTime = 0;
@@ -88,6 +90,14 @@ public final class AppSession implements Serializable {
      */
     public void setAttribute(String key, Object value) {
         map.put(key, value);
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     /**

@@ -50,6 +50,10 @@ public class OrderPO extends AbstractPO implements Serializable {
     @TableField("`use_count`")
     private Long useCount;
 
+    @ApiModelProperty("绘画权益次数")
+    @TableField("`draw_count`")
+    private Long drawCount;
+
     @ApiModelProperty("原价")
     @TableField("`original_price`")
     private BigDecimal originalPrice;
@@ -61,6 +65,18 @@ public class OrderPO extends AbstractPO implements Serializable {
     @ApiModelProperty("订单金额")
     @TableField("`money`")
     private BigDecimal money;
+
+    @ApiModelProperty("优惠金额")
+    @TableField("`promotion_money`")
+    private BigDecimal promotionMoney;
+
+    @ApiModelProperty("优惠券id")
+    @TableField("`coupon_id`")
+    private Long couponId;
+
+    @ApiModelProperty("礼品卡id")
+    @TableField("`card_id`")
+    private Long cardId;
 
     @ApiModelProperty("支付状态（已支付/未支付）")
     @TableField("`order_status`")

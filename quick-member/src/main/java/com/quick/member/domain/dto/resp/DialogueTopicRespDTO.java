@@ -2,7 +2,6 @@ package com.quick.member.domain.dto.resp;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.quick.member.common.enums.DialogTopicType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

@@ -1,6 +1,7 @@
 package com.quick.member.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.quick.member.common.enums.UserRole;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.domain.po.SysUserPO;
 
@@ -19,6 +20,11 @@ public interface SysUserService extends IService<SysUserPO> {
      * @return 返回用户对象，没有则返回null
      */
     SysUserInfoRespDTO queryUserByPhone(String phone);
+
+    /**
+     * 根据ip和用户角色用户
+     */
+    SysUserInfoRespDTO queryUserByIp(UserRole role,String ip);
 
     /**
      * 根据用户id查用户
@@ -47,6 +53,11 @@ public interface SysUserService extends IService<SysUserPO> {
      * @return 返回用户对象，没有则返回null
      */
     SysUserInfoRespDTO checkPwd(String phone, String pwd);
+
+    /**
+     * 创建游客用户
+     */
+    SysUserInfoRespDTO touristRegister(String ip);
 
     /**
      * 用户密码修改

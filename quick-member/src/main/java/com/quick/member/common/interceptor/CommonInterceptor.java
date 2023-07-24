@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
-import java.util.Iterator;
 
 @Slf4j
 @Component
@@ -30,9 +29,11 @@ public class CommonInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String remoteAddr = request.getRemoteAddr();
         String body = null;
-        if(HttpMethod.POST.matches(method)){
-            ContentCachingRequestWrapper requestWapper = (ContentCachingRequestWrapper) request;
-            body = IOUtils.toString(requestWapper.getBody(), requestWapper.getCharacterEncoding());
+        if(HttpMethod.POST.matches(method)&&!requestURI.contains("imageGenerate")){
+            if(request instanceof ContentCachingRequestWrapper){
+                ContentCachingRequestWrapper requestWapper = (ContentCachingRequestWrapper) request;
+                body = IOUtils.toString(requestWapper.getBody(), requestWapper.getCharacterEncoding());
+            }
         }
         Enumeration<String> parameterNames = request.getParameterNames();
         StringBuilder builder = new StringBuilder();

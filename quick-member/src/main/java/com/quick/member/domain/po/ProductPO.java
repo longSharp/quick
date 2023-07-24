@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.quick.member.common.enums.MemberType;
 import com.quick.member.common.enums.ProductType;
+import com.quick.member.common.enums.SaleStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -37,19 +38,19 @@ public class ProductPO extends AbstractPO implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("周卡、月卡、季卡、年卡、永久、次卡")
-    @TableField("`type`")
+    @ApiModelProperty("有效周期（周、月、季、年）")
+    @TableField("`validity_period`")
     private ProductType type;
 
     @NotBlank
     @TableField("`name`")
     private String name;
 
-    @ApiModelProperty("会员周期数（月为单位）")
-    @TableField("cyc_num")
-    private Integer cycNum;
+    @ApiModelProperty(" 绘画权益次数（0：不允许；999999国际化成不限制）")
+    @TableField("draw_count")
+    private Long drawCount;
 
-    @ApiModelProperty("可使用次数")
+    @ApiModelProperty("对话权益次数")
     @TableField("use_count")
     private Long useCount;
 
@@ -60,4 +61,16 @@ public class ProductPO extends AbstractPO implements Serializable {
     @ApiModelProperty("售价")
     @TableField("sale_price")
     private BigDecimal salePrice;
+
+    @ApiModelProperty("（会员、超级会员、固定充值卡、任意充值卡）")
+    @TableField("`product_type`")
+    private ProductType productType;
+
+    @ApiModelProperty(" (上架、下架)")
+    @TableField("`sale_status`")
+    private SaleStatus saleStatus;
+
+    @ApiModelProperty("备注")
+    @TableField("`REMARK`")
+    private String remark;
 }

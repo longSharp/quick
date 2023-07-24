@@ -1,15 +1,18 @@
 package com.quick.member.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.quick.member.common.config.exception.BusinessException;
 import com.quick.member.common.constant.AuthServerConstant;
 import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;
 import com.quick.member.common.utils.UserHolder;
+import com.quick.member.domain.dto.req.AppSession;
 import com.quick.member.domain.dto.req.LoginByPwdReqDTO;
 import com.quick.member.domain.dto.req.PasswordModiReqDTO;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
+import com.quick.member.domain.dto.resp.UserCheckLoginRespDTO;
 import com.quick.member.domain.po.SysUserPO;
 import com.quick.member.domain.po.UseLogPO;
 import com.quick.member.service.ISessionCache;
@@ -45,7 +48,7 @@ public class UserController {
     private UseLogService useLogService;
 
     @RequestMapping(value = "checkSmsCode", method = RequestMethod.POST)
-    public R<SysUserInfoRespDTO> checkSmsCode(
+    public R<String> checkSmsCode(
             @NotBlank @Pattern(regexp = "^1[3|4|5|7|8|9][0-9]\\d{8}$", message = "电话号码格式不正确") @RequestParam String phone,
             @NotBlank @RequestParam String code,
             @RequestParam(required = false) String invitCode){
@@ -56,7 +59,7 @@ public class UserController {
             SysUserInfoRespDTO sysUserPO = sysUserService.queryUserByPhone(phone);
             //若用户已注册，则直接登入,否则创建用户
             if(sysUserPO!=null){
-                return R.ok(ResultCode.REQUEST_SUCCESS.getCode(),ResultCode.SMS_CODE_VALID_SUCCESS.getMsg(),sysUserPO);
+                return R.ok(sysUserPO);
             }
             //检查邀请码是否存在
             if(!checkInviCode(invitCode)){
@@ -65,7 +68,7 @@ public class UserController {
             //创建用户
             try {
                 SysUserInfoRespDTO us = sysUserService.createUser(phone,invitCode);
-                return R.ok(ResultCode.REQUEST_SUCCESS.getCode(),ResultCode.SMS_CODE_VALID_SUCCESS.getMsg(),us);
+                return R.ok(us);
             } catch (Exception e) {
                 e.printStackTrace();
                 return R.error(ResultCode.REGISTER_FAIL.getCode(),ResultCode.REGISTER_FAIL.getMsg());
@@ -74,8 +77,30 @@ public class UserController {
         return R.error(ResultCode.SMS_CODE_VALID_FAIL.getCode(),ResultCode.SMS_CODE_VALID_FAIL.getMsg());
     }
 
+    @RequestMapping(value = "touristLogin", method = RequestMethod.POST)
+    public R<String> touristRegister(HttpServletRequest request){
+        String ip = request.getRemoteAddr();
+        SysUserInfoRespDTO user = sysUserService.queryUserByIp(UserRole.TOURIST, ip);
+        if(user!=null){
+            return R.ok(user);
+        }
+        SysUserInfoRespDTO sysUserPO = sysUserService.touristRegister(ip);
+        if(sysUserPO == null){
+            return R.error();
+        }
+        return R.ok(sysUserPO);
+    }
+
+    @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
+    public R<String> isLogin(HttpServletRequest request){
+        boolean login = checkLogin(request);
+        UserCheckLoginRespDTO userCheckLoginRespDTO = new UserCheckLoginRespDTO();
+        userCheckLoginRespDTO.setLogin(login);
+        return R.ok(userCheckLoginRespDTO);
+    }
+
     @RequestMapping(value = "loginByPwd", method = RequestMethod.POST)
-    public R<SysUserInfoRespDTO> loginByPwd(@Valid @NotNull @RequestBody LoginByPwdReqDTO loginByPwdReqDTO){
+    public R<String> loginByPwd(@Valid @NotNull @RequestBody LoginByPwdReqDTO loginByPwdReqDTO){
         SysUserInfoRespDTO sysUserPO = sysUserService.checkPwd(loginByPwdReqDTO.getPhone(), loginByPwdReqDTO.getPassword());
         if(sysUserPO == null){
             return R.error(ResultCode.PASSWORD_ERROR.getCode(), ResultCode.PASSWORD_ERROR.getMsg());
@@ -96,7 +121,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "attendance", method = RequestMethod.POST)
-    public R<UseLogPO> attendance(){
+    public R<String> attendance(){
         Long userId = UserHolder.getUserId();
         //检测用户状态，角色
         checkUser(userId);
@@ -109,7 +134,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "modifyPwd", method = RequestMethod.POST)
-    public R<SysUserInfoRespDTO> modifyPwd(@Valid @NotNull @RequestBody PasswordModiReqDTO loginByPwdReqDTO){
+    public R<String> modifyPwd(@Valid @NotNull @RequestBody PasswordModiReqDTO loginByPwdReqDTO){
         if(!checkSms(loginByPwdReqDTO.getPhone(), loginByPwdReqDTO.getCode())){
             return R.error(ResultCode.SMS_CODE_VALID_FAIL.getCode(),ResultCode.SMS_CODE_VALID_FAIL.getMsg());
         }
@@ -122,9 +147,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "getUserInfo", method = RequestMethod.POST)
-    public R<SysUserInfoRespDTO> getUserInfo(){
+    public R<String> getUserInfo(){
         SysUserInfoRespDTO sysUserInfoRespDTO = sysUserService.queryUserById(UserHolder.getUserId());
-        return R.ok(ResultCode.REQUEST_SUCCESS.getCode(), ResultCode.REQUEST_SUCCESS.getMsg(),sysUserInfoRespDTO);
+        return R.ok(sysUserInfoRespDTO);
     }
 
     private void checkUser(Long userId){
@@ -138,7 +163,7 @@ public class UserController {
         }
         UserRole role = sysUserInfoRespDTO.getRole();
         if(role.getCode().equals(UserRole.TOURIST.getCode())){
-            throw new BusinessException(ResultCode.SESSION_EMPTY);
+            throw new BusinessException(ResultCode.TOURIST_NOT_ATT);
         }
     }
 
@@ -153,5 +178,19 @@ public class UserController {
     private boolean checkSms(String phone,String code){
         String redisCode = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
         return !StringUtils.isEmpty(redisCode)&&code.equals(redisCode.split("_")[0]);
+    }
+
+    private boolean checkLogin(HttpServletRequest request){
+        String sessionId = request.getHeader("sessionId");
+        if(StringUtils.isEmpty(sessionId)){
+            return false;
+        }
+        String remoteAddr = request.getRemoteAddr();
+        String[] userIds = sessionId.split("-");
+        if(userIds.length<2){
+            return false;
+        }
+        AppSession sessionObj = sessionRedisCache.getSessionForHash(userIds[1], remoteAddr);
+        return sessionObj != null && sessionObj.getId().equals(sessionId);
     }
 }

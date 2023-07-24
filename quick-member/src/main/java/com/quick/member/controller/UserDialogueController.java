@@ -28,21 +28,21 @@ public class UserDialogueController {
     private UserDialogueService userDialogueService;
 
     @RequestMapping(value = "/getDialogueByUserId/{topic}")
-    public R<List<UserDialogueRespDTO>> getDialogueByUserId(@NotNull @PathVariable Integer topic){
+    public R<String> getDialogueByUserId(@NotNull @PathVariable Integer topic){
         Boolean isTopic = topic==1;
         List<UserDialoguePO> dialogues = userDialogueService.getDialogueByUserId(UserHolder.getUserId(),isTopic);
         return R.ok(BeanUtil.copyToList(dialogues,UserDialogueRespDTO.class));
     }
 
     @RequestMapping(value = "/getDialogueByName")
-    public R<List<UserDialogueRespDTO>> getDialogueByName(@NotNull @RequestParam Integer topic,@RequestParam String name){
+    public R<String> getDialogueByName(@NotNull @RequestParam Integer topic,@RequestParam String name){
         Boolean isTopic = topic==1;
         List<UserDialoguePO> dialogues = userDialogueService.getDialogueByName(UserHolder.getUserId(),name,isTopic);
         return R.ok(BeanUtil.copyToList(dialogues,UserDialogueRespDTO.class));
     }
 
     @RequestMapping(value = "/modifyDialogue", method = RequestMethod.POST)
-    public R<UserDialogueRespDTO> modifyDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
+    public R<String> modifyDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
         UserDialoguePO userDialoguePO = BeanUtil.copyProperties(userDisalogs, UserDialoguePO.class);
         userDialoguePO.setUserId(UserHolder.getUserId());
         userDialogueService.modifyDialogue(userDialoguePO);
@@ -56,7 +56,7 @@ public class UserDialogueController {
     }
 
     @RequestMapping(value = "/addDialogue", method = RequestMethod.POST)
-    public R<UserDialogueRespDTO> addDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
+    public R<String> addDialogue(@Valid @NotNull @RequestBody UserDialogueReqDTO userDisalogs){
         UserDialoguePO userDialoguePO = BeanUtil.copyProperties(userDisalogs, UserDialoguePO.class);
         userDialoguePO.setUserId(UserHolder.getUserId());
         userDialogueService.addDialogue(userDialoguePO);

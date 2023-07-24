@@ -1,6 +1,5 @@
 package com.quick.member.controller;
 
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.dfa.SensitiveUtil;
 import cn.hutool.json.JSONArray;
@@ -19,18 +18,15 @@ import com.quick.member.common.config.params.ServiceParamsConfig;
 import com.quick.member.common.enums.MemberMark;
 import com.quick.member.common.enums.ProblemType;
 import com.quick.member.common.enums.ResultCode;
-import com.quick.member.common.enums.Status;
 import com.quick.member.common.filter.ChatGptUtil;
 import com.quick.member.common.utils.HttpUtils;
 import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.*;
 import com.quick.member.domain.dto.resp.R;
-import com.quick.member.domain.po.DialogueTopicPO;
 import com.quick.member.domain.po.SysUserPO;
 import com.quick.member.domain.po.UseAccountPO;
 import com.quick.member.domain.po.UserMemberPO;
 import com.quick.member.mongodb.po.UserProblemLogPO;
-import com.quick.member.mongodb.repository.UserProblemLogRepository;
 import com.quick.member.service.*;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -122,10 +118,16 @@ public class ChatGptController {
         //1.查询用户是否是会员
         SysUserPO user = sysUserService.getById(userId);
         UserMemberPO userMemberPO = null;
-        UseAccountPO useAccountPO = null;
-        LocalDateTime now = LocalDateTime.now();
+        UseAccountPO useAccountPO = useAccountService.queryUseAccountByUserId(userId);
+        //2.如果不是会员，检查用户次数账户是否还有次数
+        if(useAccountPO==null){
+            os.write(ResultCode.NOT_FIND_USE_ACCOUNT.getMsg().getBytes(Charset.defaultCharset()));
+            os.flush();
+            os.close();
+            return;
+        }
         if(MemberMark.MEMBER.equals(user.getIsMember())){
-            //2.如果是会员，检查当日会员使用次数是否使用完毕
+            //3.如果是会员，检查当日会员使用次数是否使用完毕
             userMemberPO = userMemberService.queryMemberByUserId(userId);
             if(userMemberPO==null){
                 os.write(ResultCode.MEMBER_EXPIRED.getMsg().getBytes(Charset.defaultCharset()));
@@ -133,27 +135,15 @@ public class ChatGptController {
                 os.close();
                 return;
             }
-            Long todayBalanceCount = userMemberPO.getTodayBalanceCount();
-            LocalDateTime balanceCountTime = userMemberPO.getBalanceCountTime();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String today = now.format(formatter);
-            String format = balanceCountTime.format(formatter);
-            if(today.equals(format)&&todayBalanceCount>=serviceParamsConfig.getMemberUseCount()){
-                os.write(ResultCode.MEMBER_COUNT_COMPLETE.getMsg().getBytes(Charset.defaultCharset()));
+            Long todayBalanceCount = userMemberPO.getDialogBalance();
+            if(useAccountPO.getBalanceCount()<=0&&todayBalanceCount<=0&&useAccountPO.getGiveCount()<=0){
+                os.write(ResultCode.USE_ACCOUNT_BALANCE_INSUFFICIENT.getMsg().getBytes(Charset.defaultCharset()));
                 os.flush();
                 os.close();
                 return;
             }
         }else{
-            //3.如果不是会员，检查用户次数账户是否还有次数
-            useAccountPO = useAccountService.queryUseAccountByUserId(userId);
-            if(useAccountPO==null){
-                os.write(ResultCode.NOT_FIND_USE_ACCOUNT.getMsg().getBytes(Charset.defaultCharset()));
-                os.flush();
-                os.close();
-                return;
-            }
-            if(useAccountPO.getBalanceCount()<=0){
+            if(useAccountPO.getBalanceCount()<=0&&useAccountPO.getGiveCount()<=0){
                 os.write(ResultCode.USE_ACCOUNT_BALANCE_INSUFFICIENT.getMsg().getBytes(Charset.defaultCharset()));
                 os.flush();
                 os.close();
@@ -165,10 +155,6 @@ public class ChatGptController {
         setResponse(response);
         List<UserProblemLogPO> userProblemLogPOS = userProblemLogService.queryAllByUserIdAndDiaId(userId,dialogId,ProblemType.TEXT);
         List<ChatMessage> chatMessages = new ArrayList<>();
-        if(userProblemLogPOS==null||userProblemLogPOS.size()==0){
-
-        }
-
         boolean isSens = SensitiveUtil.containsSensitive(content);
         if(isSens){
             os.write(ResultCode.SENSITIVE_ERROR.getMsg().getBytes(Charset.defaultCharset()));
@@ -197,7 +183,7 @@ public class ChatGptController {
     }
 
     @RequestMapping(value = "/getGptLog/{type}/{dialogId}")
-    public R<List<ChatMessage>> getGptLog(@NotNull @PathVariable Integer type,@NotNull @PathVariable Long dialogId){
+    public R<String> getGptLog(@NotNull @PathVariable Integer type,@NotNull @PathVariable Long dialogId){
         Long userId = UserHolder.getUserId();
         List<UserProblemLogPO> userProblemLogPOS = userProblemLogService.queryAllByUserIdAndDiaId(userId,dialogId,ProblemType.valueOf(type));
         if(userProblemLogPOS!=null&&userProblemLogPOS.size()>=1&&userProblemLogPOS.get(0).getTopic()!=null&&userProblemLogPOS.get(0).getTopic()){
@@ -210,7 +196,7 @@ public class ChatGptController {
             chatMessages.add(userMsg);
             chatMessages.add(assistantMsg);
         }
-        return R.ok(ResultCode.REQUEST_SUCCESS.getCode(), ResultCode.REQUEST_SUCCESS.getMsg(),chatMessages);
+        return R.ok(chatMessages);
     }
 
     @RequestMapping(value = "/createImg")
@@ -219,7 +205,7 @@ public class ChatGptController {
     }
 
     @RequestMapping(value = "/createImgForAi")
-    public R<TryLeapReqDTO> createImgForAi(@NotBlank @RequestParam String content) throws Exception {
+    public R<String> createImgForAi(@NotBlank @RequestParam String content) throws Exception {
         String model = getModel();
         TryLeapAIParamsReqDTO bodyPar = new TryLeapAIParamsReqDTO();
         bodyPar.setPrompt(content)
@@ -255,7 +241,7 @@ public class ChatGptController {
     }
 
     @RequestMapping(value = "/getImgForAi")
-    public R<List<GetImgForAiRespDTO>> getImgForAi(@NotBlank @RequestParam String jobId) throws Exception {
+    public R<String> getImgForAi(@NotBlank @RequestParam String jobId) throws Exception {
         String model = getModel();
         List<GetImgForAiRespDTO> result = getImgForAiRespDTO(model, jobId);
         if(result==null){

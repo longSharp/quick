@@ -2,6 +2,7 @@ package com.quick.member.domain.dto.req;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
 
 @Data
 @Accessors(chain = true)
@@ -41,6 +42,34 @@ public class RequestLogContext {
     private String requestDuration;
 
     public String toString() {
+        if(StringUtils.isEmpty(requestQuery)&&StringUtils.isEmpty(requestBody)){
+            return "\n###############start##############\n"+
+                    "#requestUrl="+requestUrl+"\n"+
+                    "#requestMethod="+requestMethod+"\n"+
+                    "#requestSessionId="+requestSessionId+"\n"+
+                    "#remoteAddr="+remoteAddr+"\n"+
+                    "#requestDuration="+requestDuration+"\n"+
+                    "################end##############\n";
+        }
+        if(StringUtils.isEmpty(requestQuery)){
+            return "\n###############start##############\n"+
+                    "#requestUrl="+requestUrl+"\n"+
+                    "#requestMethod="+requestMethod+"\n"+
+                    "#requestBody="+requestBody+"\n"+
+                    "#requestSessionId="+requestSessionId+"\n"+
+                    "#remoteAddr="+remoteAddr+"\n"+
+                    "#requestDuration="+requestDuration+"\n"+
+                    "################end##############\n";
+        }
+        if(StringUtils.isEmpty(requestBody)){
+            return "\n###############start##############\n"+
+                    "#requestUrl="+requestUrl+"\n"+
+                    "#requestMethod="+requestMethod+"\n"+
+                    "#requestSessionId="+requestSessionId+"\n"+
+                    "#remoteAddr="+remoteAddr+"\n"+
+                    "#requestDuration="+requestDuration+"\n"+
+                    "################end##############\n";
+        }
         return "\n###############start##############\n"+
                 "#requestUrl="+requestUrl+"\n"+
                 "#requestMethod="+requestMethod+"\n"+
@@ -48,7 +77,6 @@ public class RequestLogContext {
                 "#requestBody="+requestBody+"\n"+
                 "#requestSessionId="+requestSessionId+"\n"+
                 "#remoteAddr="+remoteAddr+"\n"+
-                "#responseData="+responseData+"\n"+
                 "#requestDuration="+requestDuration+"\n"+
                 "################end##############\n";
     }

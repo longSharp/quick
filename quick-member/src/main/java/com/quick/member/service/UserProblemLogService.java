@@ -33,5 +33,11 @@ public interface UserProblemLogService {
      * @param isMember 是否是会员
      * @return
      */
-    UserProblemLogPO saveAndUpdate(Long dialogId,Boolean isUpper,UserMemberPO userMemberPO, UseAccountPO useAccountPO,String answer,String question,boolean isMember);
+    UserProblemLogPO saveAndUpdate(Long dialogId,
+                                   Boolean isUpper,
+                                   UserMemberPO userMemberPO,
+                                   UseAccountPO useAccountPO,
+                                   String answer,
+                                   String question,
+                                   boolean isMember);
 }

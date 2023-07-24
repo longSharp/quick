@@ -10,9 +10,13 @@ public enum UserRole implements IBaseEnum{
      */
     USERS(1,"普通用户"),
     /**
-     * 超级管理员
+     * 会员
      */
-    ADMINISTRATORS(2,"超级管理员");
+    MEMBER(2,"会员"),
+    /**
+     * 超级会员
+     */
+    ADMINISTRATORS_MEMBER(3,"超级会员");
 
     private Integer code;
     private String name;

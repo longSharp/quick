@@ -42,4 +42,8 @@ public class UseAccountPO  extends AbstractPO implements Serializable {
     @ApiModelProperty("剩余使用次数")
     @TableField("balance_count")
     private Long balanceCount;
+
+    @ApiModelProperty("赠送次数")
+    @TableField("give_count")
+    private Long giveCount;
 }

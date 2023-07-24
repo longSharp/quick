@@ -55,7 +55,7 @@ public class PaymentController {
 
 
     @PostMapping("/createOrder")
-    public R<WechatPaymentDTO> createOrder(@Valid @NotNull @RequestBody OrderInfoReqDTO orderDto){
+    public R<String> createOrder(@Valid @NotNull @RequestBody OrderInfoReqDTO orderDto){
         OrderInfo orderInfo = BeanUtil.copyProperties(orderDto,OrderInfo.class);
         orderInfo.setUserId(UserHolder.getUserId());
         WechatPaymentDTO payment = wechatPaymentService.createWechatOrderAll(orderInfo);
@@ -73,7 +73,7 @@ public class PaymentController {
     }
 
     @GetMapping("/getOrderStatus/{orderNo}")
-    public R<OrderStatusRespDTO> getOrderStatus(@NotBlank @PathVariable String orderNo){
+    public R<String> getOrderStatus(@NotBlank @PathVariable String orderNo){
         WechatPayMentStatus wechatPayMentStatus = wechatPaymentService.queryOrderForWechat(orderNo);
         OrderStatusRespDTO orderStatusRespDTO = new OrderStatusRespDTO();
         orderStatusRespDTO.setStatus(wechatPayMentStatus);

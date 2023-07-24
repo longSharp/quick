@@ -56,7 +56,7 @@ public class CardResourceServiceImpl extends ServiceImpl<CardResourceMapper, Car
             throw new BusinessException(ResultCode.CARD_SOURCE_ERROR);
         }
         LambdaQueryWrapper<ProductPO> productQuery = new LambdaQueryWrapper<>();
-        productQuery.eq(ProductPO::getId,cards.get(0).getProductId()).eq(ProductPO::getStatus, Status.VALID);
+        //TODO 卡密查询产品
         List<ProductPO> products = productService.list(productQuery);
         if(products==null||products.size()==0){
             throw new BusinessException(ResultCode.CARD_SOURCE_ERROR);

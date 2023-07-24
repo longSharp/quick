@@ -18,9 +18,9 @@ public class DialogueTopicServiceImpl extends ServiceImpl<DialogueTopicMapper, D
     private DialogueTopicMapper dialogueTopicMapper;
 
     @Override
-    public List<DialogueTopicPO> getDialogueTopicsByType(Integer type) {
+    public List<DialogueTopicPO> getDialogueTopicsByType(Long type) {
         LambdaQueryWrapper<DialogueTopicPO> query = new LambdaQueryWrapper<>();
-        query.eq(DialogueTopicPO::getType,type).eq(DialogueTopicPO::getStatus, Status.VALID);
+        query.eq(DialogueTopicPO::getTopicClassId,type).eq(DialogueTopicPO::getStatus, Status.VALID);
         return this.list(query);
     }
 

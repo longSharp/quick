@@ -73,4 +73,8 @@ public class SysUserPO extends AbstractPO implements Serializable {
     @ApiModelProperty("用户状态")
     @TableField("user_status")
     private UserStatus userStatus;
+
+    @ApiModelProperty("用户注册ip")
+    @TableField("user_ip")
+    private String userIp;
 }

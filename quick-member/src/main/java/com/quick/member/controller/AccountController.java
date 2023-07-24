@@ -29,9 +29,9 @@ public class AccountController {
      * @return 新增结果
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public R<AccountPO> add(@RequestBody AccountPO account) {
+    public R<String> add(@RequestBody AccountPO account) {
          accountService.addAccount(account);
-        return R.ok(ResultCode.REQUEST_SUCCESS.getCode(),ResultCode.REQUEST_SUCCESS.getMsg());
+        return R.ok();
     }
 
     /**
@@ -40,8 +40,8 @@ public class AccountController {
      * @return
      */
     @GetMapping("/query/{id}")
-    public R<AccountPO> queryAccountById(@PathVariable Long id){
+    public R<String> queryAccountById(@PathVariable Long id){
         AccountPO account = accountService.queryAccountById(id);
-        return R.ok("1110","成功",account);
+        return R.ok(account);
     }
 }

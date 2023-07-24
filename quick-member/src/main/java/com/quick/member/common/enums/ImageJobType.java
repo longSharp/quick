@@ -15,7 +15,7 @@ public enum ImageJobType implements IBaseEnum{
      */
     UPSCALE(2,"选择图片"),
     /**
-     * 生成中
+     * 选择生成
      */
     VARIATION(3,"选择生成"),
     /**
@@ -25,7 +25,39 @@ public enum ImageJobType implements IBaseEnum{
     /**
      * 图片生文
      */
-    DESCRIBE(5,"图片生文");
+    DESCRIBE(5,"图片生文"),
+    /**
+     * 重调图片
+     */
+    HIGH_VARIATION(6,"重调图片"),
+    /**
+     * 微调图片
+     */
+    LOW_VARIATION(7,"微调图片"),
+    /**
+     * 向左扩展
+     */
+    PAN_LEFT(8,"向左扩展"),
+    /**
+     * 向右扩展
+     */
+    PAN_RIGHT(9,"向右扩展"),
+    /**
+     * 向上扩展
+     */
+    PAN_UP(10,"向上扩展"),
+    /**
+     * 向下扩展
+     */
+    PAN_DOWN(11,"向下扩展"),
+    /**
+     * 放大2倍
+     */
+    OUTPAINT_2(12,"放大2倍"),
+    /**
+     * 放大1.5倍
+     */
+    OUTPAINT_1_5(13,"放大1.5倍");
 
     private Integer code;
     private String name;

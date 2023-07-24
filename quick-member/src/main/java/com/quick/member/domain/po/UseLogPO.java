@@ -53,7 +53,7 @@ public class UseLogPO  extends AbstractPO implements Serializable {
     @TableField("question_answer_id")
     private String questionAnswerId;
 
-    @ApiModelProperty("用户id")
+    @ApiModelProperty("用户账户id")
     @TableField("use_account_id")
     private Long useAccountId;
 
@@ -63,4 +63,8 @@ public class UseLogPO  extends AbstractPO implements Serializable {
     @ApiModelProperty("使用次数")
     @TableField("count")
     private Long count;
+
+    @ApiModelProperty("备注")
+    @TableField("remark")
+    private String remark;
 }

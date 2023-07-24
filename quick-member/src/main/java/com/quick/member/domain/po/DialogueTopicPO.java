@@ -28,8 +28,8 @@ public class DialogueTopicPO extends AbstractPO implements Serializable {
     private Long id;
 
     @ApiModelProperty("分类")
-    @TableField("`type`")
-    private Integer type;
+    @TableField("`topic_class_id`")
+    private Long topicClassId;
 
     @ApiModelProperty("主题名称")
     @TableField("`name`")
@@ -62,4 +62,9 @@ public class DialogueTopicPO extends AbstractPO implements Serializable {
     @ApiModelProperty("顺序号")
     @TableField("`order`")
     private Integer order;
+
+    @ApiModelProperty("消耗货币数(默认值 1)")
+    @TableField("`currency_num`")
+    private Integer currencyNum;
+
 }

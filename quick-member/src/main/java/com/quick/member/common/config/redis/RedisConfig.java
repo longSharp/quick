@@ -27,6 +27,7 @@ public class RedisConfig {
         // 配置
         Config config = new Config();
         config.useSingleServer().setAddress("redis://"+host+":"+port).setPassword(password);
+//        config.useSingleServer().setAddress("redis://"+host+":"+port);
         // 创建RedissonClient对象
         return Redisson.create(config);
     }

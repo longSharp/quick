@@ -129,7 +129,9 @@ public class UserDialogueServiceImpl extends ServiceImpl<UserDialogueMapper, Use
         try {
             if(dialoguePO.getTopicId()!=null){
                 LambdaQueryWrapper<UserDialoguePO> query = new LambdaQueryWrapper<>();
-                query.eq(UserDialoguePO::getTopicId,dialoguePO.getTopicId()).eq(UserDialoguePO::getStatus,Status.VALID);
+                query.eq(UserDialoguePO::getTopicId,dialoguePO.getTopicId())
+                        .eq(UserDialoguePO::getStatus,Status.VALID)
+                        .eq(UserDialoguePO::getUserId,dialoguePO.getUserId());
                 List<UserDialoguePO> userDialoguePOS = userDialogueMapper.selectList(query);
                 if(userDialoguePOS.size()!=0){
                     return userDialoguePOS.get(0);

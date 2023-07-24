@@ -12,7 +12,7 @@ public interface DialogueTopicService  extends IService<DialogueTopicPO> {
      * @param type
      * @return
      */
-    List<DialogueTopicPO> getDialogueTopicsByType(Integer type);
+    List<DialogueTopicPO> getDialogueTopicsByType(Long type);
 
     void insert(DialogueTopicPO topic);
 

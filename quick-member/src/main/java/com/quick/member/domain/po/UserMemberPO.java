@@ -48,10 +48,6 @@ public class UserMemberPO extends AbstractPO implements Serializable {
     @TableField("`type`")
     private ProductType type;
 
-    @ApiModelProperty("余额")
-    @TableField("`money`")
-    private BigDecimal money;
-
     @ApiModelProperty("生效开始日期")
     @TableField("start_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -68,12 +64,20 @@ public class UserMemberPO extends AbstractPO implements Serializable {
     @TableField("order_no")
     private String orderNo;
 
-    @ApiModelProperty("今日剩余次数")
-    @TableField("today_balance_count")
-    private Long todayBalanceCount;
+    @ApiModelProperty("剩余次数")
+    @TableField("dialog_balance")
+    private Long dialogBalance;
 
     @ApiModelProperty("剩余次数更新时间")
-    @TableField("balance_count_time")
-    private LocalDateTime balanceCountTime;
+    @TableField("last_dialog_time")
+    private LocalDateTime lastDialogTime;
+
+    @ApiModelProperty("绘画剩余次数")
+    @TableField("draw_balance")
+    private Long drawBalance;
+
+    @ApiModelProperty("最后一次绘画时间")
+    @TableField("last_draw_time")
+    private LocalDateTime lastDrawTime;
 
 }

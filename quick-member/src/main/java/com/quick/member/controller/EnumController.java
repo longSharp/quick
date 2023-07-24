@@ -31,7 +31,7 @@ public class EnumController {
      * 枚举值获取
      */
     @RequestMapping(value = "/getEnum/{enumFullName}")
-    public R<List<EnumCommonVO>> getEnum(@PathVariable("enumFullName") String enumFullName) {
+    public R<String> getEnum(@PathVariable("enumFullName") String enumFullName) {
         List<EnumCommonVO> enumCommonVoS = new ArrayList<>();
         try {
             Class c = enumProperties.getEnum(enumFullName.toLowerCase(Locale.ROOT));

@@ -24,7 +24,15 @@ public enum UseAccountEvent implements IBaseEnum{
     /**
      * 签到
      */
-    ATTENDANCE(5,"签到");
+    ATTENDANCE(5,"签到"),
+    /**
+     * 特殊调增
+     */
+    SPECIAL_INCR(6,"特殊调增"),
+    /**
+     * 特殊调减
+     */
+    SPECIAL_UNINCR(7,"特殊调减");
 
     private Integer code;
     private String name;

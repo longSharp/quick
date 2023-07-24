@@ -24,9 +24,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/user/modifyPwd",
             "/gpt/sendStream",
             "/payment/notify",
-            "/image/generate",
-            "/image/getTask",
-            "/types/getEnum/imageProport"
+            "/user/touristLogin"
     };
 
     @Override

@@ -32,7 +32,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addProduct")
-    public R<ProductPO> addProduct(@Valid @NotNull @RequestBody ProductReqDTO dto){
+    public R<String> addProduct(@Valid @NotNull @RequestBody ProductReqDTO dto){
         ProductPO productPO = BeanUtil.copyProperties(dto, ProductPO.class);
         productService.save(productPO);
         return R.ok(productPO);

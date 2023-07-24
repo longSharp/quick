@@ -62,6 +62,9 @@ public class WechatPaymentServiceImpl implements WechatPaymentService {
         OrderPO orderPO = new OrderPO();
         String orderNo = OrderNoUtils.getNo();
 
+        //3.1 查询优惠券
+
+
         orderPO.setOrderNo(orderNo)
                 .setOrderStatus(OrderStatus.CREATED)
                 .setMoney(product.getSalePrice())
@@ -210,13 +213,10 @@ public class WechatPaymentServiceImpl implements WechatPaymentService {
         if(!UserStatus.NORMAL.equals(userStatus)){
             throw new BusinessException(ResultCode.USE_STATUS_ERROR);
         }
-        if(UserRole.ADMINISTRATORS.equals(sysUserInfoRespDTO.getRole())&&!asCard){
-            throw new BusinessException(ResultCode.ADMIN_NOT_PAY);
-        }
         if(UserRole.TOURIST.equals(sysUserInfoRespDTO.getRole())){
-            throw new BusinessException(ResultCode.SESSION_EMPTY);
+            throw new BusinessException(ResultCode.TOURIST_NOT_PAY);
         }
-        if(MemberMark.MEMBER.equals(sysUserInfoRespDTO.getIsMember())){
+        if(MemberMark.MEMBER.equals(sysUserInfoRespDTO.getIsMember())&&!asCard){
             throw new BusinessException(ResultCode.FOR_MEMBER);
         }
 

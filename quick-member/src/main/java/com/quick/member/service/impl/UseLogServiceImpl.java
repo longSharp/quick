@@ -73,6 +73,7 @@ public class UseLogServiceImpl extends ServiceImpl<UseLogMapper, UseLogPO> imple
         QueryWrapper<UseAccountPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id",userId).eq("status", Status.VALID);
         UseAccountPO useAccount = useAccountMapper.selectOne(queryWrapper);
+
         useAccount.setBalanceCount(useAccount.getBalanceCount()+serviceParamsConfig.getAttendanceCount());
         useAccountMapper.updateById(useAccount);
         //生成记录

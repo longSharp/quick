@@ -29,9 +29,20 @@ public class ImagerJobServiceImpl implements ImagerJobService {
                 || Objects.equals(ImageJobStatus.CREATING.getCode(), taskStatus)
                 || Objects.equals(ImageJobStatus.GENERATING.getCode(), taskStatus)){
             Map<Object, Object> entries = redisTemplate.opsForHash().entries(RedisKeyPrefixConstant.IMAGE_TASK + userId);
+            Map<Object, Object> successMap = redisTemplate.opsForHash().entries(RedisKeyPrefixConstant.SUCCESS_IMAGE_TASK + userId);
+            Object[] keys = successMap.keySet().toArray();
+            if(keys.length>0){
+                redisTemplate.opsForHash().delete(RedisKeyPrefixConstant.SUCCESS_IMAGE_TASK + userId, keys);
+            }
             List<ImageJobPO> list = new ArrayList<>();
             Collection<Object> values = entries.values();
             for (Object value : values) {
+                String json = (String)value;
+                ImageJobPO imageJobPO = JSONUtil.toBean(json, ImageJobPO.class);
+                list.add(imageJobPO);
+            }
+            Collection<Object> values1 = successMap.values();
+            for (Object value : values1) {
                 String json = (String)value;
                 ImageJobPO imageJobPO = JSONUtil.toBean(json, ImageJobPO.class);
                 list.add(imageJobPO);

@@ -54,4 +54,10 @@ public class ImageJobPO extends AbstractPO implements Serializable {
 
     @TableField("`job_type`")
     private ImageJobType jobType;
+
+    @TableField("`rule`")
+    private String rule;
+
+    @TableField("`hash`")
+    private Integer hash;
 }

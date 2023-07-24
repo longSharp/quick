@@ -1,6 +1,12 @@
 package com.quick.member.domain.dto.resp;
 
+import cn.hutool.json.JSONConfig;
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.quick.member.common.enums.ResultCode;
+import com.quick.member.common.utils.DESUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -29,11 +35,30 @@ public class R<T> implements Serializable {
         return r;
     }
 
-    public static <T> R<T> ok(T data) {
+    public static <T> R<T> ok1(T data) {
         R<T> r = new R<>();
         r.code = ResultCode.REQUEST_SUCCESS.getCode();
         r.msg = ResultCode.REQUEST_SUCCESS.getMsg();
         r.data = data;
+        return r;
+    }
+
+    public static <T> R<String> ok(T data) {
+        R<String> r = new R<>();
+        r.code = ResultCode.REQUEST_SUCCESS.getCode();
+        r.msg = ResultCode.REQUEST_SUCCESS.getMsg();
+        // 创建ObjectMapper对象
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        // 将Java对象转换为JSON字符串
+        String jsonString;
+        try {
+            jsonString = objectMapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return R.error();
+        }
+        r.data = DESUtil.encrypt(jsonString);
         return r;
     }
 

@@ -11,6 +11,11 @@ public class RedisKeyPrefixConstant {
     public static final String IMAGE_TASK = "image_task:";
 
     /**
+     * 已完成生成图片任务
+     */
+    public static final String SUCCESS_IMAGE_TASK = "success_image_task:";
+
+    /**
      * 临时记录task所属者
      */
     public static final String TASK_USER_ID = "task_user_id:";

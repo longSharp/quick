@@ -24,7 +24,7 @@ public class PromptLabelController {
     private PromptLabelService promptLabelService;
 
     @RequestMapping("/getProptPrompt")
-    public R<List<PromptProptRespDTO>> getProptPrompt(){
+    public R<String> getProptPrompt(){
         List<PromptLabelPO> proptPrompt = promptLabelService.getProptPrompt();
         List<PromptProptRespDTO> data = new ArrayList<>();
         for (PromptLabelPO promptLabelPO : proptPrompt) {

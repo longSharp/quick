@@ -1,7 +1,9 @@
 package com.quick.member.common.aop;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.json.JSONUtil;
 import com.quick.member.common.enums.ResultCode;
+import com.quick.member.common.utils.DESUtil;
 import com.quick.member.domain.dto.req.AppSession;
 import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
@@ -24,7 +26,9 @@ public class LoginAspect {
     @Autowired
     private ISessionCache sessionRedisCache;
 
-    @Around("execution(* com.quick.member.controller.UserController.checkSmsCode(..)) || execution(* com.quick.member.controller.UserController.loginByPwd(..))")
+    @Around("execution(* com.quick.member.controller.UserController.checkSmsCode(..)) || " +
+            "execution(* com.quick.member.controller.UserController.loginByPwd(..)) || " +
+            "execution(* com.quick.member.controller.UserController.touristRegister(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();
         if (result instanceof R) {
@@ -39,9 +43,11 @@ public class LoginAspect {
                     .getRequestAttributes()).getRequest();
             //请求的IP
             String ip = request.getRemoteAddr();
-            SysUserInfoRespDTO data = (SysUserInfoRespDTO) responseBody.getData();
+            String decode = DESUtil.decrypt((String) responseBody.getData());
+            SysUserInfoRespDTO data = JSONUtil.toBean(decode, SysUserInfoRespDTO.class);
             String sessionId = IdUtil.simpleUUID()+"-"+data.getId();
             AppSession session = AppSession.create(ip,data.getId()+"",sessionId);
+            session.setRole(data.getRole().getCode());
             //挤登
             sessionRedisCache.clearSessionForHash(data.getId()+"");
             sessionRedisCache.putSessionForHash(session);

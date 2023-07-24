@@ -1,30 +1,32 @@
 package com.quick.member.controller;
 
-import cn.hutool.json.JSONUtil;
-import com.quick.member.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.common.enums.ImageJobType;
 import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.MidjourneyGenerateReqDTO;
+import com.quick.member.domain.dto.req.MidjourneyOtherReqDTO;
+import com.quick.member.domain.dto.req.MidjourneyResetReqDTO;
 import com.quick.member.domain.dto.req.MidjourneyUpsampleReqDTO;
+import com.quick.member.domain.dto.resp.AbstractRespDTO;
 import com.quick.member.domain.dto.resp.ImageJobRespDTO;
 import com.quick.member.domain.dto.resp.R;
+import com.quick.member.domain.po.AbstractPO;
 import com.quick.member.domain.po.ImageJobPO;
 import com.quick.member.service.ImagerJobService;
 import com.quick.member.service.MidjourneyService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -47,21 +49,34 @@ public class MidjourneyController {
     @PostMapping(value = "/generate")
     public R generate(@Valid @NotNull @RequestBody MidjourneyGenerateReqDTO dto){
         Long userId = UserHolder.getUserId();
+        dto.setPrompt(dto.getPrompt().replace("--","").replace("**","").replace(">","").replace("<","").trim());
         midjourneyService.generateImages(dto,userId);
         return R.ok();
     }
 
     @PostMapping(value = "/imageGenerate")
-    public R imageGenerateImage(@Valid @NotNull @RequestBody MultipartFile file,@Valid @NotNull @RequestBody MidjourneyGenerateReqDTO dto){
+    public R imageGenerateImage(@Valid @NotNull MultipartFile file,@Valid @NotNull MidjourneyGenerateReqDTO dto) {
         Long userId = UserHolder.getUserId();
-        return R.ok();
+        dto.setPrompt(dto.getPrompt().replace("--","").replace("**","").replace(">","").replace("<","").trim());
 //        try {
 //            midjourneyService.imageGenerateImage(file,dto,userId);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //            return R.error(ResultCode.GENERATE_FAIL);
 //        }
-//        return R.ok();
+        return R.ok();
+    }
+
+    @PostMapping(value = "/reset")
+    public R reset(@Valid @NotNull @RequestBody MidjourneyResetReqDTO dto){
+        midjourneyService.reset(dto);
+        return R.ok();
+    }
+
+    @PostMapping(value = "/other")
+    public R other(@Valid @NotNull @RequestBody MidjourneyOtherReqDTO dto){
+        midjourneyService.other(dto,null);
+        return R.ok();
     }
 
     @PostMapping(value = "/upsample")
@@ -70,11 +85,21 @@ public class MidjourneyController {
         return R.ok();
     }
 
+    @PostMapping(value = "/variation")
+    public R variation(@Valid @NotNull @RequestBody MidjourneyUpsampleReqDTO dto){
+        midjourneyService.variation(dto);
+        return R.ok();
+    }
+
     @RequestMapping("/getTask")
-    public R<List<ImageJobRespDTO>> getTask(@NotNull @RequestParam Integer taskStatus){
+    public R<String> getTask(@NotNull @RequestParam Integer taskStatus){
         Long userId = UserHolder.getUserId();
         List<ImageJobPO> jobs = imagerJobService.getJobByUserId(userId,taskStatus);
-        ArrayList<ImageJobRespDTO> imageJobResp = new ArrayList<>();
+        List<ImageJobRespDTO> imageJobResp = new ArrayList<>();
+        // 创建一个比较器，按时间升序排序
+        Comparator<ImageJobPO> comparator = Comparator.comparing(AbstractPO::getCreateTime);
+        // 使用比较器对list进行排序
+        jobs.sort(comparator);
         for (ImageJobPO job : jobs) {
             ImageJobRespDTO imageJobRespDTO = new ImageJobRespDTO();
             String url = null;
@@ -88,8 +113,9 @@ public class MidjourneyController {
                     .setJobStatus(job.getJobStatus().getName())
                     .setJobSchedule(job.getJobSchedule())
                     .setPrompt(job.getPrompt())
-                    .setCreateTime(job.getCreateTime())
-                    .setUpdateTime(job.getUpdateTime());
+                    .setRule(job.getRule())
+                    .setCreateTime(job.getCreateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .setUpdateTime(job.getUpdateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             if(jobType!=null){
                 Integer code = jobType.getCode();
                 String name = jobType.getName();
@@ -98,6 +124,7 @@ public class MidjourneyController {
             }
             imageJobResp.add(imageJobRespDTO);
         }
+
         return R.ok(imageJobResp);
     }
 

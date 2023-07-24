@@ -57,6 +57,9 @@ public class SysUserInfoRespDTO extends AbstractRespDTO {
     @ApiModelProperty("剩余次数")
     private Long useCountBalance;
 
+    @ApiModelProperty("赠送次数")
+    private Long giveCount;
+
     @ApiModelProperty("会员详情")
     private UserMemberDTO memberInfo;
 }

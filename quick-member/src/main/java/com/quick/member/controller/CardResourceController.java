@@ -30,10 +30,9 @@ public class CardResourceController {
     private SysUserService sysUserService;
 
     @PostMapping("/addCard")
-    public R<CardResourcePO> addCard(@Valid @NotNull @RequestParam Long productId){
+    public R<String> addCard(@Valid @NotNull @RequestParam Long productId){
         String password = RandomUtil.randomString(32);
         CardResourcePO po = new CardResourcePO();
-        po.setProductId(productId);
         po.setCardPassword(password);
         cardResourceService.save(po);
         return R.ok(po);
@@ -59,9 +58,6 @@ public class CardResourceController {
         UserRole role = sysUserInfoRespDTO.getRole();
         if(role.getCode().equals(UserRole.TOURIST.getCode())){
             throw new BusinessException(ResultCode.SESSION_EMPTY);
-        }
-        if(role.getCode().equals(UserRole.ADMINISTRATORS.getCode())){
-            throw new BusinessException(ResultCode.CARD_ADMIN_ERROR);
         }
     }
 

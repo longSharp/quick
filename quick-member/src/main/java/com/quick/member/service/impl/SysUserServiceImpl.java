@@ -2,6 +2,7 @@ package com.quick.member.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -71,7 +72,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
         useAccountPOQueryWrapper.eq("user_id",sysUserPO.getId())
                 .eq("status",Status.VALID);
         UseAccountPO useAccount = useAccountMapper.selectOne(useAccountPOQueryWrapper);
-
+        //TODO 查询用户信息
         if(sysUserPO.getIsMember()==MemberMark.MEMBER){
             QueryWrapper<UserMemberPO> mamberWrapper = new QueryWrapper<>();
             mamberWrapper.eq("user_id",sysUserPO.getId())
@@ -81,7 +82,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
             userMemberDTO.setType(member.getType().getName());
             userMemberDTO.setEndDate(member.getEndDate());
             userMemberDTO.setStartDate(member.getStartDate());
-            userMemberDTO.setToDayCount(member.getTodayBalanceCount());
             sysUserInfoRespDTO.setMemberInfo(userMemberDTO);
         }
 
@@ -114,7 +114,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
         useAccountPOQueryWrapper.eq("user_id",sysUserPO.getId())
                 .eq("status",Status.VALID);
         UseAccountPO useAccount = useAccountMapper.selectOne(useAccountPOQueryWrapper);
-
+        //TODO 查询用户信息
         if(sysUserPO.getIsMember()==MemberMark.MEMBER){
             QueryWrapper<UserMemberPO> mamberWrapper = new QueryWrapper<>();
             mamberWrapper.eq("user_id",sysUserPO.getId())
@@ -124,7 +124,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
             userMemberDTO.setType(member.getType().getName());
             userMemberDTO.setEndDate(member.getEndDate());
             userMemberDTO.setStartDate(member.getStartDate());
-            userMemberDTO.setToDayCount(member.getTodayBalanceCount());
             sysUserInfoRespDTO.setMemberInfo(userMemberDTO);
         }
 
@@ -262,5 +261,60 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
             return sysUserPO;
         }
         return null;
+    }
+
+    @Transactional
+    @Override
+    public SysUserInfoRespDTO touristRegister(String ip) {
+        SysUserInfoRespDTO sysUserInfoRespDTO = new SysUserInfoRespDTO();
+        //注册者需要创建一系列账号
+        //1.创建用户账号
+        SysUserPO sysUserPO = new SysUserPO();
+        //生成邀请码
+        String name = "魔法师"+RandomUtil.randomInt(1000,1000000);
+        String code = RandomUtil.randomString(serviceParamsConfig.getInvitLength()).toUpperCase(Locale.ROOT);
+        sysUserPO.setIsMember(MemberMark.UNMEMBER)
+                .setInviteCode(code)
+                .setName(name)
+                .setUserStatus(UserStatus.NORMAL)
+                .setRole(UserRole.TOURIST)
+                .setUserIp(ip);
+        userMapper.insert(sysUserPO);
+
+        //2.创建次数账户
+        UseAccountPO useAccountPO = new UseAccountPO();
+        useAccountPO.setUserId(sysUserPO.getId())
+                .setBalanceCount(0L)
+                .setGiveCount(10L);
+        useAccountMapper.insert(useAccountPO);
+        BeanUtil.copyProperties(sysUserPO, sysUserInfoRespDTO);
+        sysUserInfoRespDTO.setUseAccountId(useAccountPO.getId())
+                .setUseCountBalance(useAccountPO.getBalanceCount())
+                .setGiveCount(useAccountPO.getGiveCount());
+        return sysUserInfoRespDTO;
+    }
+
+    @Override
+    public SysUserInfoRespDTO queryUserByIp(UserRole role, String ip) {
+        LambdaQueryWrapper<SysUserPO> query = new LambdaQueryWrapper<>();
+        query.eq(SysUserPO::getUserIp,ip)
+                .eq(SysUserPO::getRole,role)
+                .eq(SysUserPO::getStatus,Status.VALID);
+        SysUserPO sysUserPO = userMapper.selectOne(query);
+        if(sysUserPO==null){
+            return null;
+        }
+        SysUserInfoRespDTO result = new SysUserInfoRespDTO();
+        BeanUtil.copyProperties(sysUserPO,result);
+        LambdaQueryWrapper<UseAccountPO> useAccountPOQueryWrapper = new LambdaQueryWrapper<>();
+        useAccountPOQueryWrapper.eq(UseAccountPO::getUserId,sysUserPO.getId())
+                .eq(UseAccountPO::getStatus,Status.VALID);
+        UseAccountPO useAccount = useAccountMapper.selectOne(useAccountPOQueryWrapper);
+        if(useAccount!=null){
+            result.setUseAccountId(useAccount.getId())
+                    .setUseCountBalance(useAccount.getBalanceCount())
+                    .setGiveCount(useAccount.getGiveCount());
+        }
+        return result;
     }
 }

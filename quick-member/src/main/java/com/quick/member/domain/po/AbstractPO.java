@@ -27,4 +27,13 @@ public class AbstractPO {
     @ApiModelProperty("状态")
     @TableField("`status`")
     private Status status;
+
+    @ApiModelProperty("创建人id")
+    @TableField("`create_id`")
+    private Long createId;
+
+    @ApiModelProperty("修改人id")
+    @TableField("`modify_id`")
+    private Long modifyId;
+
 }

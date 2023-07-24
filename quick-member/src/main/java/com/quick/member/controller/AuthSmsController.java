@@ -44,7 +44,7 @@ public class AuthSmsController {
     private SysUserService sysUserService;
 
     @RequestMapping(value = "sendCode", method = RequestMethod.POST)
-    public R<SendCodeRespDTO> sendCode(
+    public R<String> sendCode(
             @Pattern(regexp = "^1[3|4|5|7|8|9][0-9]\\d{8}$", message = "电话号码格式不正确") @NotBlank @RequestParam String phone){
         //接口防刷
         String redisCode = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
@@ -65,6 +65,6 @@ public class AuthSmsController {
         redisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX+phone,codeStr,10, TimeUnit.MINUTES);
 //        AuthSmsBaseResp authSmsBaseResp = authSmsService.sendCode(phone, code.split("_")[0]);
         AuthSmsBaseResp authSmsBaseResp = AuthSmsBaseResp.builder().code(ResultCode.REQUEST_SUCCESS.getCode()).msg(ResultCode.REQUEST_SUCCESS.getMsg()).build();
-        return R.ok(authSmsBaseResp.getCode(),authSmsBaseResp.getMsg(),data);
+        return R.ok(data);
     }
 }
