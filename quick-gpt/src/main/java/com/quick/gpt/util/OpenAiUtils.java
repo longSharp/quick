@@ -1,8 +1,8 @@
 package com.quick.gpt.util;
 
 import com.google.common.cache.Cache;
-import com.quick.gpt.dto.Billing;
-import com.quick.gpt.dto.Subscription;
+import com.quick.gpt.domain.dto.Billing;
+import com.quick.gpt.domain.dto.Subscription;
 import com.quick.gpt.enums.chat.RoleEnum;
 import com.quick.gpt.enums.edit.EditModelEnum;
 import com.quick.gpt.enums.embedding.EmbeddingModelEnum;

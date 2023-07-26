@@ -1,8 +1,7 @@
 package com.quick.member.controller;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.quick.common.dto.resp.R;
 import com.quick.member.domain.dto.resp.PromptProptRespDTO;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.po.PromptLabelPO;
 import com.quick.member.service.PromptLabelService;
 import lombok.extern.slf4j.Slf4j;

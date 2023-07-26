@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum OrderStatus implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum OrderStatus implements IBaseEnum {
     /**
      * 创建订单
      */

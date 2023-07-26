@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum ImageProport implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum ImageProport implements IBaseEnum {
 
     /**
      * 1:1

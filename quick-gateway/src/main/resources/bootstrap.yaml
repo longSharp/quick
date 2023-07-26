@@ -1,0 +1,19 @@
+server:
+  port: 80
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:103.144.245.137:9872}
+        namespace: ${NACOS_NAMESPACE:yuick-ai}
+      config:
+        #nacos配置中心服务器地址
+        server-addr: ${NACOS_ADDR:103.144.245.137:9872}
+        #文件后缀格式
+        file-extension: yaml
+        #nacos配置中心命名空间
+        namespace: ${NACOS_NAMESPACE:yuick-ai}
+        #nacos配置中心分组
+        group: ${spring.application.name}

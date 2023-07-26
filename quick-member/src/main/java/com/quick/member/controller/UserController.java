@@ -1,16 +1,15 @@
 package com.quick.member.controller;
 
-import cn.hutool.json.JSONUtil;
-import com.quick.member.common.config.exception.BusinessException;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.constant.AuthServerConstant;
-import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;
 import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.AppSession;
 import com.quick.member.domain.dto.req.LoginByPwdReqDTO;
 import com.quick.member.domain.dto.req.PasswordModiReqDTO;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.domain.dto.resp.UserCheckLoginRespDTO;
 import com.quick.member.domain.po.SysUserPO;
@@ -192,5 +191,11 @@ public class UserController {
         }
         AppSession sessionObj = sessionRedisCache.getSessionForHash(userIds[1], remoteAddr);
         return sessionObj != null && sessionObj.getId().equals(sessionId);
+    }
+
+    @GetMapping("getById")
+    public R<String> getById(@RequestParam Long userId){
+        SysUserPO user = sysUserService.getById(userId);
+        return R.ok(user);
     }
 }

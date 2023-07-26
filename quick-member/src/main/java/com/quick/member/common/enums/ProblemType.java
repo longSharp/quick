@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum ProblemType implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum ProblemType implements IBaseEnum {
     /**
      * 已支付
      */

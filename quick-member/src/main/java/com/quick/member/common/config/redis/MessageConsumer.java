@@ -1,8 +1,8 @@
 package com.quick.member.common.config.redis;
 
-import com.quick.member.common.constant.RedisKeyPrefixConstant;
+import com.quick.common.constant.RedisKeyPrefixConstant;
+import com.quick.common.enums.Status;
 import com.quick.member.common.enums.OrderStatus;
-import com.quick.member.common.enums.Status;
 import com.quick.member.common.enums.WechatPayMentStatus;
 import com.quick.member.domain.dto.req.RedisDelayMessage;
 import com.quick.member.domain.po.OrderPO;

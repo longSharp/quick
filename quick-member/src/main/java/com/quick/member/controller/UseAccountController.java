@@ -1,6 +1,12 @@
 package com.quick.member.controller;
 
+import com.quick.common.dto.resp.R;
+import com.quick.member.domain.po.UseAccountPO;
+import com.quick.member.service.UseAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,7 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-06-16
  */
 @RestController
-@RequestMapping("/com.star/use-account")
+@RequestMapping("/account")
 public class UseAccountController {
+    @Autowired
+    private UseAccountService useAccountService;
 
+    @GetMapping("queryUseAccountByUserId")
+    public R<String> queryUseAccountByUserId(@RequestParam Long userId){
+        UseAccountPO useAccountPO = useAccountService.queryUseAccountByUserId(userId);
+        return R.ok(useAccountPO);
+    }
 }

@@ -1,11 +1,13 @@
 package com.quick.member.common.enums;
 
+import com.quick.common.enums.IBaseEnum;
+
 /**
  * @Auther: yangzh
  * @Date: 2023/7/20 15:45
  * @Description:
  */
-public enum SaleStatus implements IBaseEnum{
+public enum SaleStatus implements IBaseEnum {
     /**
      * 上架
      */

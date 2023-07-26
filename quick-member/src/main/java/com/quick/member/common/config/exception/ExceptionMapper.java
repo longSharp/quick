@@ -1,7 +1,8 @@
 package com.quick.member.common.config.exception;
 
-import com.quick.member.common.enums.ResultCode;
-import com.quick.member.domain.dto.resp.R;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

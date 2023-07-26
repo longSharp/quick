@@ -1,17 +1,15 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.Status;
 import com.quick.member.common.config.params.ServiceParamsConfig;
-import com.quick.member.common.enums.DialogTopicType;
-import com.quick.member.common.enums.Status;
 import com.quick.member.common.enums.TopicApplication;
 import com.quick.member.dao.TopicClassMapper;
 import com.quick.member.domain.dto.resp.DialogueTopicRespDTO;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.po.DialogueTopicPO;
 import com.quick.member.domain.po.TopicClassPO;
 import com.quick.member.service.DialogueTopicService;

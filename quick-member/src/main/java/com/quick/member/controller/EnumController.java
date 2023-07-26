@@ -1,11 +1,11 @@
 package com.quick.member.controller;
 
-import com.quick.member.common.config.exception.BusinessException;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.IBaseEnum;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.config.system.EnumProperties;
-import com.quick.member.common.enums.IBaseEnum;
-import com.quick.member.common.enums.ResultCode;
 import com.quick.member.domain.dto.req.EnumCommonVO;
-import com.quick.member.domain.dto.resp.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

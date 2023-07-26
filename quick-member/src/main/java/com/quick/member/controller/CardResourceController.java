@@ -1,12 +1,12 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.util.RandomUtil;
-import com.quick.member.common.config.exception.BusinessException;
-import com.quick.member.common.enums.ResultCode;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;
 import com.quick.member.common.utils.UserHolder;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.domain.po.CardResourcePO;
 import com.quick.member.service.CardResourceService;
@@ -14,7 +14,6 @@ import com.quick.member.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

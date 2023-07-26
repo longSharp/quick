@@ -2,16 +2,16 @@ package com.quick.member.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
-import com.quick.member.common.config.exception.BusinessException;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.config.params.WechatPayParamsConfig;
-import com.quick.member.common.constant.RedisKeyPrefixConstant;
+import com.quick.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.common.enums.OrderStatus;
-import com.quick.member.common.enums.ResultCode;
 import com.quick.member.common.enums.WechatPayMentStatus;
 import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.*;
 import com.quick.member.domain.dto.resp.OrderStatusRespDTO;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.WechatNotifyRespDTO;
 import com.quick.member.domain.po.OrderPO;
 import com.quick.member.service.IMessageDelayQueueService;
@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

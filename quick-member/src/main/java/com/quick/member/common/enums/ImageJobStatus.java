@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum ImageJobStatus implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum ImageJobStatus implements IBaseEnum {
 
     /**
      * 创建中

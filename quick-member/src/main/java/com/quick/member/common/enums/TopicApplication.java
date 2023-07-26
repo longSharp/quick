@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum TopicApplication implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum TopicApplication implements IBaseEnum {
     /**
      * 问答
      */

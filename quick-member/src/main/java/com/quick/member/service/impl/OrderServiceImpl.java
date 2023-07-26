@@ -3,10 +3,12 @@ package com.quick.member.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quick.member.common.config.exception.BusinessException;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.enums.Status;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.config.params.ServiceParamsConfig;
 import com.quick.member.common.config.redis.MessageProducer;
-import com.quick.member.common.constant.RedisKeyPrefixConstant;
+import com.quick.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.common.enums.*;
 import com.quick.member.dao.*;
 import com.quick.member.domain.dto.req.RedisDelayMessage;
@@ -19,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 
 /**
  * <p>

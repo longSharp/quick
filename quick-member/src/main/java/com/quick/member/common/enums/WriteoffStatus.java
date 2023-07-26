@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum WriteoffStatus implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum WriteoffStatus implements IBaseEnum {
     /**
      * 已销账
      */

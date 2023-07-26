@@ -1,0 +1,11 @@
+dependencies {
+    implementation project(":quick-commom")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation (group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: "${mybatiesVersion}"){
+        exclude module:'javax.ws.rs.core.Application'
+    }
+    implementation 'net.dv8tion:JDA:5.0.0-alpha.20'
+    implementation "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+    implementation "mysql:mysql-connector-java:${mysqlConnector}"
+}

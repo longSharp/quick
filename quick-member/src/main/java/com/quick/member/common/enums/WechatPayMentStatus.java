@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum WechatPayMentStatus implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum WechatPayMentStatus implements IBaseEnum {
     /**
      * 支付成功
      */

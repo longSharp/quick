@@ -1,8 +1,8 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.quick.common.dto.resp.R;
 import com.quick.member.domain.dto.req.ProductReqDTO;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.po.ProductPO;
 import com.quick.member.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

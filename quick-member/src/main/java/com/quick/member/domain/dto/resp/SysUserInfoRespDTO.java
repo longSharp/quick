@@ -2,6 +2,7 @@ package com.quick.member.domain.dto.resp;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.quick.common.dto.resp.AbstractRespDTO;
 import com.quick.member.common.enums.MemberMark;
 import com.quick.member.common.enums.UserRole;
 import com.quick.member.common.enums.UserStatus;

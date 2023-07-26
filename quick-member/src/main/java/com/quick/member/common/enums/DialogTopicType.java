@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum DialogTopicType implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum DialogTopicType implements IBaseEnum {
     /**
      * 热门推荐
      */

@@ -2,10 +2,10 @@ package com.quick.member.common.aop;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONUtil;
-import com.quick.member.common.enums.ResultCode;
-import com.quick.member.common.utils.DESUtil;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.utils.DESUtil;
 import com.quick.member.domain.dto.req.AppSession;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.service.ISessionCache;
 import org.aspectj.lang.ProceedingJoinPoint;

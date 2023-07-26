@@ -1,11 +1,11 @@
 package com.quick.member.controller;
 
 import cn.hutool.core.util.RandomUtil;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
 import com.quick.member.common.config.params.AuthSmsParamsConfig;
 import com.quick.member.common.constant.AuthServerConstant;
-import com.quick.member.common.enums.ResultCode;
 import com.quick.member.domain.dto.resp.AuthSmsBaseResp;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.domain.dto.resp.SendCodeRespDTO;
 import com.quick.member.domain.dto.resp.SysUserInfoRespDTO;
 import com.quick.member.service.IAuthSmsService;

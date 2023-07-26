@@ -1,7 +1,7 @@
 package com.quick.member.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.quick.member.common.enums.Status;
+import com.quick.common.enums.Status;
 import com.quick.member.dao.PromptLabelMapper;
 import com.quick.member.domain.po.PromptLabelPO;
 import com.quick.member.service.PromptLabelService;

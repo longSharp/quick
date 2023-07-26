@@ -1,4 +1,20 @@
-server:
-  port: 11002
-  servlet:
-    context-path: /gateway-service
+spring:
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        #用户服务
+        - id: member_route
+          uri: lb://member-service
+          predicates:
+            - Path=/api/member-service/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        #绘画服务
+        - id: draw_route
+          uri: lb://draw-service
+          predicates:
+            - Path=/api/draw-service/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}

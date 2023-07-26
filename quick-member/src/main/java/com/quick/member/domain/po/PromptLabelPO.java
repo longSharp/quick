@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
 
 @Getter

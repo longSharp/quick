@@ -1,10 +1,10 @@
 package com.quick.member.common.interceptor;
 
 import cn.hutool.json.JSONUtil;
-import com.quick.member.common.enums.ResultCode;
+import com.quick.common.dto.resp.R;
+import com.quick.common.enums.ResultCode;
 import com.quick.member.common.utils.UserHolder;
 import com.quick.member.domain.dto.req.AppSession;
-import com.quick.member.domain.dto.resp.R;
 import com.quick.member.service.ISessionCache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Deprecated
 @Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {

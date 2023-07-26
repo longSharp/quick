@@ -1,11 +1,13 @@
 package com.quick.member.common.enums;
 
+import com.quick.common.enums.IBaseEnum;
+
 /**
  * @Auther: yangzh
  * @Date: 2023/7/20 15:38
  * @Description:
  */
-public enum CouponOwner implements IBaseEnum{
+public enum CouponOwner implements IBaseEnum {
     /**
      * 用户
      */

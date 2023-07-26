@@ -1,10 +1,12 @@
 package com.quick.member.common.enums;
 
+import com.quick.common.enums.IBaseEnum;
+
 /**
  * @author longcm
  * 余额流水类型
  */
-public enum BalanceType implements IBaseEnum{
+public enum BalanceType implements IBaseEnum {
 
     /**
      * 支入

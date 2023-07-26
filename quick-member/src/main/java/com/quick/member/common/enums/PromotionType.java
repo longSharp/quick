@@ -1,11 +1,13 @@
 package com.quick.member.common.enums;
 
+import com.quick.common.enums.IBaseEnum;
+
 /**
  * @Auther: yangzh
  * @Date: 2023/7/20 15:40
  * @Description:
  */
-public enum PromotionType implements IBaseEnum{
+public enum PromotionType implements IBaseEnum {
     /**
      * 折扣
      */

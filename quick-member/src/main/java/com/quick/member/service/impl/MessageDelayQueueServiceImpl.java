@@ -2,7 +2,7 @@ package com.quick.member.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.quick.member.common.config.params.ServiceParamsConfig;
-import com.quick.member.common.constant.RedisKeyPrefixConstant;
+import com.quick.common.constant.RedisKeyPrefixConstant;
 import com.quick.member.domain.dto.req.RedisDelayMessage;
 import com.quick.member.service.IMessageDelayQueueService;
 import org.springframework.beans.factory.annotation.Autowired;

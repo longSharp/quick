@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum UserRole implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum UserRole implements IBaseEnum {
     /**
      * 游客
      */

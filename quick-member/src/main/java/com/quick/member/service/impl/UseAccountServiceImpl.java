@@ -2,7 +2,7 @@ package com.quick.member.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quick.member.common.enums.Status;
+import com.quick.common.enums.Status;
 import com.quick.member.dao.UseAccountMapper;
 import com.quick.member.domain.po.UseAccountPO;
 import com.quick.member.service.UseAccountService;

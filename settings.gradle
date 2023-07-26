@@ -5,4 +5,5 @@ include 'quick-gpt'
 include 'quick-mongodb'
 include 'quick-commom'
 include 'quick-gateway'
+include 'quick-draw'
 

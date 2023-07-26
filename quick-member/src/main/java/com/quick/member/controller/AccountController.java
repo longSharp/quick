@@ -1,7 +1,6 @@
 package com.quick.member.controller;
 
-import com.quick.member.common.enums.ResultCode;
-import com.quick.member.domain.dto.resp.R;
+import com.quick.common.dto.resp.R;
 import com.quick.member.domain.po.AccountPO;
 import com.quick.member.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

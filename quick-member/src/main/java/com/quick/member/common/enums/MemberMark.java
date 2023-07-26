@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum MemberMark implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum MemberMark implements IBaseEnum {
 
     /**
      * 非会员

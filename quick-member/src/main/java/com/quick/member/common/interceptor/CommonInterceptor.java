@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
+@Deprecated
 @Slf4j
 @Component
 public class CommonInterceptor implements HandlerInterceptor {

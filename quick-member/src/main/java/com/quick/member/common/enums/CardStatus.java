@@ -1,5 +1,7 @@
 package com.quick.member.common.enums;
 
+import com.quick.common.enums.IBaseEnum;
+
 public enum CardStatus implements IBaseEnum {
     /**
      * 未使用

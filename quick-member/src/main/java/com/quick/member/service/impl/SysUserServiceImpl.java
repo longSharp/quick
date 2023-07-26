@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quick.member.common.config.exception.BusinessException;
+import com.quick.common.enums.ResultCode;
+import com.quick.common.enums.Status;
+import com.quick.common.exception.BusinessException;
 import com.quick.member.common.config.params.ServiceParamsConfig;
 import com.quick.member.common.enums.*;
 import com.quick.member.dao.*;
@@ -58,7 +60,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPO> im
         SysUserInfoRespDTO sysUserInfoRespDTO = new SysUserInfoRespDTO();
         QueryWrapper<SysUserPO> sysUserPOQueryWrapper = new QueryWrapper<>();
         sysUserPOQueryWrapper.eq("tel",phone);
-        sysUserPOQueryWrapper.eq("status",Status.VALID);
+        sysUserPOQueryWrapper.eq("status", Status.VALID);
         SysUserPO sysUserPO = userMapper.selectOne(sysUserPOQueryWrapper);
 
         if(sysUserPO==null) return null;

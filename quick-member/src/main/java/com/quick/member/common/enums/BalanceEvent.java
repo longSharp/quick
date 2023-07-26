@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum BalanceEvent implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum BalanceEvent implements IBaseEnum {
     /**
      * 邀请
      */

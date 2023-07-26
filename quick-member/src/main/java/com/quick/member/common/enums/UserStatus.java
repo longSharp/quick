@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum UserStatus implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum UserStatus implements IBaseEnum {
     /**
      * 正常
      */

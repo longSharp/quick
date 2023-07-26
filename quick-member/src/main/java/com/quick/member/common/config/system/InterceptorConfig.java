@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Deprecated
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
@@ -24,7 +25,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/user/modifyPwd",
             "/gpt/sendStream",
             "/payment/notify",
-            "/user/touristLogin"
+            "/user/touristLogin",
+            "/user/checkLogin"
     };
 
     @Override
@@ -36,16 +38,5 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**") // 拦截所有请求
                 .excludePathPatterns(excludePathPatterns); // 不拦截登录请求
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOriginPatterns("*")
-                .allowedHeaders("*")
-                .allowedMethods("*")
-                .allowCredentials(true)
-                .maxAge(3600);
-        WebMvcConfigurer.super.addCorsMappings(registry);
     }
 }

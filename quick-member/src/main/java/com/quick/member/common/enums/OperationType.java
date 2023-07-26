@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum OperationType implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum OperationType implements IBaseEnum {
     /**
      * 会员充值
      */

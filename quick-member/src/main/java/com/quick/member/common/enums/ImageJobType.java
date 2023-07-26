@@ -1,6 +1,8 @@
 package com.quick.member.common.enums;
 
-public enum ImageJobType implements IBaseEnum{
+import com.quick.common.enums.IBaseEnum;
+
+public enum ImageJobType implements IBaseEnum {
 
     /**
      * 文生图
